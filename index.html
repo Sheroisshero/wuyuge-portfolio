@@ -265,8 +265,8 @@ body.pdf .readnote{font-size:8.8px;padding:9px 12px;margin-top:12px}
 .legend i{width:14px;height:5px;border-radius:3px;display:block}
 
 /* 阶段 × 性质 热力 */
-.hot{display:grid;grid-template-columns:1fr 42px 42px 42px;gap:5px;align-items:center}
-.hot .hh{font-size:9.5px;color:var(--muted);text-align:center;letter-spacing:.06em}
+.hot{display:grid;grid-template-columns:1fr 50px 50px 50px;gap:5px;align-items:center}
+.hot .hh{font-size:9.2px;color:var(--muted);text-align:center;letter-spacing:.02em}
 .hot .hr{font-size:10.5px;color:var(--ink);letter-spacing:.02em}
 .hot .hr span{color:var(--amber);font-family:var(--mono);font-size:9px;margin-right:5px}
 .hot .cell{height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;
@@ -278,7 +278,7 @@ body.pdf .readnote{font-size:8.8px;padding:9px 12px;margin-top:12px}
 
 /* 分布条 */
 .b-bars{margin-top:20px;display:grid;gap:12px}
-.bb{display:grid;grid-template-columns:52px 1fr 34px;gap:9px;align-items:center;font-size:10.5px;color:var(--muted)}
+.bb{display:grid;grid-template-columns:96px 1fr 30px;gap:8px;align-items:center;font-size:9.4px;color:var(--muted);white-space:nowrap}
 .bb .track{height:9px;border-radius:5px;background:#F0EEE6;overflow:hidden}
 .bb .track i{height:100%;border-radius:5px;display:block;flex:none;transition:width .5s ease}
 .bb b{font-family:var(--mono);font-size:10px;color:var(--navy);text-align:right}
@@ -367,7 +367,40 @@ body.pdf .readnote{font-size:8.8px;padding:9px 12px;margin-top:12px}
 .contrib li{position:relative;padding-left:15px;font-size:12.6px;line-height:1.8;color:#20303F;margin-bottom:4px}
 .contrib li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--teal);opacity:.7}
 
+/* 一句话价值（卡片标题下方） */
+.worth{display:flex;gap:10px;align-items:flex-start;margin-top:13px;padding:10px 14px;border-radius:0 10px 10px 0;
+  border-left:3px solid var(--amber);
+  background:linear-gradient(90deg,rgba(217,138,31,.085),rgba(217,138,31,.015) 72%,transparent)}
+.worth .wt{flex:0 0 auto;font-size:9.6px;letter-spacing:.1em;font-weight:700;color:var(--amber);
+  border:1px solid rgba(217,138,31,.38);border-radius:20px;padding:2px 8px;margin-top:1px;white-space:nowrap}
+.worth p{font-size:13.4px;line-height:1.78;color:#1E2937}
+.worth p em{font-style:normal;font-weight:700;color:var(--navy)}
+
+/* 差异对照：多数做法 vs 这里 */
+.diff{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;margin-bottom:2px}
+.dc{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:11px 15px}
+.dc .dh{font-size:10.4px;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:8px;
+  display:flex;align-items:center;gap:7px}
+.dc .dh::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--muted);opacity:.5}
+.dc ul{list-style:none}
+.dc li{font-size:12.2px;line-height:1.74;color:#5A6472;padding-left:14px;position:relative;margin-bottom:3px}
+.dc li::before{content:"";position:absolute;left:1px;top:.6em;width:6px;height:1px;background:var(--muted);opacity:.65}
+.dc.win{background:linear-gradient(135deg,rgba(14,124,134,.08),rgba(14,124,134,.015));border-color:rgba(14,124,134,.3)}
+.dc.win .dh{color:var(--teal)}
+.dc.win .dh::before{background:var(--teal);opacity:.95}
+.dc.win li{color:#17343D;font-weight:500}
+.dc.win li::before{content:"";left:2px;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--teal);opacity:.75}
+
+/* 迭代与思考 */
+.blk.iter{margin-top:14px;padding:13px 17px 11px;background:#FBF9F3;border:1px solid var(--line);border-radius:12px}
+.blk.iter h4{color:var(--navy)}
+.blk.iter h4::after{background:rgba(18,50,78,.15)}
+.blk.iter ul li b{color:var(--navy)}
+
 @media (max-width:900px){
+  .diff{grid-template-columns:1fr;gap:9px}
+  .worth{padding:9px 11px;gap:8px}
+  .worth p{font-size:12.8px}
   .hero2 .hgrid{grid-template-columns:1fr;gap:26px}
   .portrait{width:96px;height:128px}
   .idname{font-size:25px}
@@ -402,16 +435,29 @@ body.pdf .chain-legend .lg{font-size:7.6px}
 body.pdf .contrib{padding:8px 10px;margin-top:8px}
 body.pdf .contrib .ch{font-size:8.2px;margin-bottom:4px}
 body.pdf .contrib li{font-size:9.6px;line-height:1.55;margin-bottom:2px;padding-left:12px}
-/* 加入「我的角色与核心贡献」后压缩卡片纵向占用，保证每个项目仍是一页 */
-body.pdf .card-top{padding:14px 22px 0}
-body.pdf .card-body{padding:10px 22px 14px}
-body.pdf .blk{margin-top:8px}
-body.pdf .blk p{font-size:10.8px;line-height:1.6}
-body.pdf .blk li{font-size:10.4px;line-height:1.54;margin-bottom:3px;padding-left:13px}
-body.pdf .fig svg{max-height:168px}
-body.pdf .contrib{padding:7px 10px;margin-top:6px}
-body.pdf .contrib .ch{font-size:8px;margin-bottom:3px}
-body.pdf .contrib li{font-size:9.1px;line-height:1.45;margin-bottom:1px;padding-left:11px}
+/* 加入「价值定位 / 差异对照 / 迭代思考」后二次压缩，保证每个项目仍是一页 */
+body.pdf .card-top{padding:9px 20px 0}
+body.pdf .card-body{padding:6px 20px 9px}
+body.pdf .blk{margin-top:6px}
+body.pdf .blk p{font-size:9.6px;line-height:1.48}
+body.pdf .blk li{font-size:9.2px;line-height:1.4;margin-bottom:1px;padding-left:11px}
+body.pdf .fig svg{max-height:118px}
+body.pdf .contrib{padding:5px 8px;margin-top:4px}
+body.pdf .contrib .ch{font-size:7.2px;margin-bottom:2px}
+body.pdf .contrib li{font-size:8.2px;line-height:1.34;margin-bottom:0;padding-left:9px}
+/* 价值定位 / 差异对照 / 迭代思考 在 PDF 中的紧凑版 */
+body.pdf .worth{margin-top:5px;padding:3px 7px;gap:5px;border-left-width:2px;border-radius:0 5px 5px 0}
+body.pdf .worth .wt{font-size:6.4px;padding:1px 4px;letter-spacing:.02em}
+body.pdf .worth p{font-size:7.9px;line-height:1.34}
+body.pdf .diff{gap:7px;margin-top:4px;margin-bottom:0}
+body.pdf .dc{padding:3px 7px;border-radius:6px}
+body.pdf .dc .dh{font-size:6.4px;margin-bottom:2px;gap:3px}
+body.pdf .dc .dh::before{width:3px;height:3px}
+body.pdf .dc li{font-size:7.2px;line-height:1.32;padding-left:8px;margin-bottom:0}
+body.pdf .dc.win li::before{width:3px;height:3px;top:.5em}
+body.pdf .blk.iter{margin-top:5px;padding:4px 8px 3px;border-radius:6px}
+body.pdf .blk.iter h4{font-size:7px;margin-bottom:2px}
+body.pdf .blk.iter li{font-size:7.2px;line-height:1.32;padding-left:8px;margin-bottom:0}
 
 /* 深色首页（PDF 封面） */
 @page :first{margin:0}
@@ -471,7 +517,7 @@ body.pdf .contrib li{font-size:9.1px;line-height:1.45;margin-bottom:1px;padding-
       <div class="chain-legend">
         <div class="lg"><i style="background:#0E7C86"></i>实战交付</div>
         <div class="lg"><i style="background:#D98A1F"></i>自研</div>
-        <div class="lg"><i style="background:#12324E"></i>课程实战复现</div>
+        <div class="lg"><i style="background:#12324E"></i>基于开源的二次开发</div>
       </div>
     </div>
   </div>
@@ -497,7 +543,7 @@ body.pdf .contrib li{font-size:9.1px;line-height:1.45;margin-bottom:1px;padding-
         <button data-f="kind" data-v="全部">全部</button>
         <button data-f="kind" data-v="live">实战交付</button>
         <button data-f="kind" data-v="self">自研</button>
-        <button data-f="kind" data-v="repro">课程复现</button>
+        <button data-f="kind" data-v="repro">基于开源的二次开发</button>
       </div>
       <div class="bf-row"><span>阶段</span>
         <button data-f="stage" data-v="全部">全部</button>
@@ -510,7 +556,7 @@ body.pdf .contrib li{font-size:9.1px;line-height:1.45;margin-bottom:1px;padding-
     <div class="b-grid">
       <div class="b-panel">
         <h4>项目时间轴</h4>
-        <p class="bp-sub">2022 → 2026，同一时段的项目其实是并行的：白天做平台，晚上写复现。</p>
+        <p class="bp-sub">2022 → 2026，同一时段的项目其实是并行的：白天做平台，晚上做开源项目的二次开发。</p>
         <div class="tb-axis"><div class="tb-ticks"><span style="left:0.0%">2022</span><span style="left:20.0%">2023</span><span style="left:40.0%">2024</span><span style="left:60.0%">2025</span><span style="left:80.0%">2026</span></div></div>
         <div class="tbwrap">
           <div class="tb-grid"><i style="left:0.0%"></i><i style="left:20.0%"></i><i style="left:40.0%"></i><i style="left:60.0%"></i><i style="left:80.0%"></i></div>
@@ -520,18 +566,18 @@ body.pdf .contrib li{font-size:9.1px;line-height:1.45;margin-bottom:1px;padding-
         <div class="legend" style="margin-top:12px">
           <span><i style="background:var(--teal)"></i>实战交付</span>
           <span><i style="background:var(--amber)"></i>自研</span>
-          <span><i style="background:var(--navy)"></i>课程复现</span>
+          <span><i style="background:var(--navy)"></i>基于开源的二次开发</span>
         </div>
       </div>
 
       <div class="b-panel">
         <h4>阶段 × 性质</h4>
-        <p class="bp-sub">同一套价值链路里，哪些阶段是实战、哪些是自己动手复现。点格子可以筛。</p>
+        <p class="bp-sub">同一套价值链路里，哪些阶段是实战交付、哪些是基于开源做二次开发。点格子可以筛。</p>
         <div class="hot">
-          <div class="hh"></div><div class="hh">实战</div><div class="hh">自研</div><div class="hh">复现</div>
+          <div class="hh"></div><div class="hh">实战</div><div class="hh">自研</div><div class="hh">二次开发</div>
           <div class="hr" data-s="01"><span>01</span>问题定义</div><div class="cell" data-k="live"></div><div class="cell l1" data-k="self">1</div><div class="cell l1" data-k="repro">1</div><div class="hr" data-s="02"><span>02</span>模型训练</div><div class="cell l1" data-k="live">1</div><div class="cell" data-k="self"></div><div class="cell l1" data-k="repro">1</div><div class="hr" data-s="03"><span>03</span>系统工程</div><div class="cell l1" data-k="live">1</div><div class="cell" data-k="self"></div><div class="cell" data-k="repro"></div><div class="hr" data-s="04"><span>04</span>评测治理</div><div class="cell l2" data-k="live">2</div><div class="cell" data-k="self"></div><div class="cell" data-k="repro"></div><div class="hr" data-s="05"><span>05</span>FDE 交付</div><div class="cell" data-k="live"></div><div class="cell" data-k="self"></div><div class="cell l1" data-k="repro">1</div><div class="hr" data-s="06"><span>06</span>行业落地</div><div class="cell" data-k="live"></div><div class="cell" data-k="self"></div><div class="cell l2" data-k="repro">2</div>
         </div>
-        <div class="b-bars"><div class="bb"><span>实战交付</span><div class="track"><i style="width:40%;background:var(--teal)"></i></div><b>4</b></div><div class="bb"><span>自研</span><div class="track"><i style="width:10%;background:var(--amber)"></i></div><b>1</b></div><div class="bb"><span>课程复现</span><div class="track"><i style="width:50%;background:var(--navy)"></i></div><b>5</b></div></div>
+        <div class="b-bars"><div class="bb"><span>实战交付</span><div class="track"><i style="width:40%;background:var(--teal)"></i></div><b>4</b></div><div class="bb"><span>自研</span><div class="track"><i style="width:10%;background:var(--amber)"></i></div><b>1</b></div><div class="bb"><span>基于开源的二次开发</span><div class="track"><i style="width:50%;background:var(--navy)"></i></div><b>5</b></div></div>
         <div class="b-bars" style="margin-top:14px"><div class="bb"><span>算法类</span><div class="track"><i style="width:20%;background:var(--navy)"></i></div><b>2</b></div><div class="bb"><span>开发类</span><div class="track"><i style="width:20%;background:var(--navy)"></i></div><b>2</b></div><div class="bb"><span>产品类</span><div class="track"><i style="width:20%;background:var(--navy)"></i></div><b>2</b></div><div class="bb"><span>数据类</span><div class="track"><i style="width:20%;background:var(--navy)"></i></div><b>2</b></div><div class="bb"><span>行业类</span><div class="track"><i style="width:20%;background:var(--navy)"></i></div><b>2</b></div></div>
       </div>
     </div>
@@ -549,8 +595,10 @@ body.pdf .contrib li{font-size:9.1px;line-height:1.45;margin-bottom:1px;padding-
       <span>01</span><span>·</span><span>算法类</span><span>·</span><span>广州市政府采购中心 · 项目负责人 / 组长 · 2025.03 – 2026.07</span><a class="repo" href="https://github.com/Sheroisshero/bid-evaluation-behavior-recognition" target="_blank" rel="noopener">查看代码 ↗</a></div>
     <h3>AI 远程异地评审专家异常行为识别</h3>
     <p class="sub">把“看不见的评审现场”变成可预警、可追溯的结构化报告</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>监管场景里“报警”没有法律效力——能出可追溯报告、能装在现场边缘设备上，这件事才算落地。多数同类项目停在检测框和弹窗。</p></div>
   </div>
   <div class="card-body">
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>套一个通用动作识别模型，识别抽烟、打电话、离岗</li><li>模型跑在服务器，现场只做采集</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>为“评审专家”这个角色重新定义异常语义：交头接耳、代评、不当言论，三路信号融合成事件</li><li>INT8 + 剪枝 + 蒸馏压到 2.1M，30 台边缘设备 15 FPS 跑满，断网也能用</li></ul></div></div>
     <div class="contrib"><div class="ch">我的角色与核心贡献<b>项目负责人 / 组长</b></div><ul><li><b>定路线</b>：把「靠人盯屏」的监管诉求拆成视频 / 音频 / 日志三路可计算指标，确定融合判级规则与黄橙红三级预警</li><li><b>攻难点</b>：异常样本仅占 5%，用重采样 + Focal Loss + 分类别阈值把 Recall 拉到 85.1%，而不是统一设 0.5</li><li><b>推落地</b>：统筹算法、开发、交付三条线，30 台边缘设备 15 FPS 稳定运行，报告全自动生成，已在广州公共资源交易中心上线</li></ul></div>
     <div class="grid2">
       <div>
@@ -568,19 +616,22 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0"
     <div class="blk"><h4>基础原理与架构</h4><p>视觉路用 YOLOv8 做人脸 / 姿态 / 手机检测，SlowFast 做时序行为识别；音频路用 Whisper/FunASR 实时转写并匹配违禁词；文本路做语义与规则双判。三路结果按时间戳对齐、置信度加权后融合成事件，再触发预警、切片和报告生成。</p><div class="fig"><div class="fig-title">三路信号 → 融合评分 → 预警 / 片段 / 报告</div>
 <svg viewBox="0 0 700 300" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="18" y="8" width="196" height="52" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="116" y="30" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">视频流</text><text x="116" y="46" font-size="9.5" fill="#6B7280" text-anchor="middle">摄像头 15 FPS</text><path d="M116 62 L116 84" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="245" y="8" width="196" height="52" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="343" y="30" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">音频流</text><text x="343" y="46" font-size="9.5" fill="#6B7280" text-anchor="middle">麦克风 / 转写</text><path d="M343 62 L343 84" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="472" y="8" width="196" height="52" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="570" y="30" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">操作日志</text><text x="570" y="46" font-size="9.5" fill="#6B7280" text-anchor="middle">系统事件</text><path d="M570 62 L570 84" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="18" y="86" width="196" height="58" rx="9" fill="#F2EFE7" stroke="#E6E2D8"/><text x="116" y="110" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">YOLOv8 目标检测</text><text x="116" y="128" font-size="9.5" fill="#6B7280" text-anchor="middle">人脸 / 姿态 / 手机</text><path d="M116 146 L116 166" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="245" y="86" width="196" height="58" rx="9" fill="#F2EFE7" stroke="#E6E2D8"/><text x="343" y="110" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">SlowFast 时序行为</text><text x="343" y="128" font-size="9.5" fill="#6B7280" text-anchor="middle">交头接耳 / 离席</text><path d="M343 146 L343 166" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="472" y="86" width="196" height="58" rx="9" fill="#F2EFE7" stroke="#E6E2D8"/><text x="570" y="110" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">ASR + 敏感词</text><text x="570" y="128" font-size="9.5" fill="#6B7280" text-anchor="middle">Whisper / FunASR</text><path d="M570 146 L570 166" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="150" y="168" width="400" height="56" rx="11" fill="#0E7C86" opacity=".10"/><rect x="150" y="168" width="400" height="56" rx="11" fill="none" stroke="#0E7C86" opacity=".35"/><text x="350" y="192" font-size="12.5" font-weight="700" fill="#0E7C86" text-anchor="middle">多模态融合与事件化评分</text><text x="350" y="210" font-size="9.5" fill="#6B7280" text-anchor="middle">时间戳对齐 · 置信度加权 · 去重归并</text><path d="M350 224 L134 252" stroke="#0E7C86" stroke-width="1.2" opacity=".45"/><rect x="40" y="254" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="134" y="271" font-size="10.5" font-weight="700" fill="#101827" text-anchor="middle">实时预警</text><text x="134" y="285" font-size="9" fill="#6B7280" text-anchor="middle">弹窗 / 声光</text><path d="M350 224 L362 252" stroke="#0E7C86" stroke-width="1.2" opacity=".45"/><rect x="268" y="254" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="362" y="271" font-size="10.5" font-weight="700" fill="#101827" text-anchor="middle">事件片段</text><text x="362" y="285" font-size="9" fill="#6B7280" text-anchor="middle">自动剪辑</text><path d="M350 224 L590 252" stroke="#0E7C86" stroke-width="1.2" opacity=".45"/><rect x="496" y="254" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="590" y="271" font-size="10.5" font-weight="700" fill="#101827" text-anchor="middle">分析报告</text><text x="590" y="285" font-size="9" fill="#6B7280" text-anchor="middle">结构化模板</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>先改评价口径，再改模型</b>：异常样本只占 5%，统一阈值下模型会整体倒向正常类。真正的问题不在模型容量，而在按类别分别定阈值——配上 Focal Loss 把 Recall 拉到 85.1%，精确率降到 76.3%。这个取舍是刻意选的：漏检一次可能是一次废标，误报只是多复核一次。</li><li><b>动作跨秒，单帧抓不住</b>：16 帧滑窗 + 重叠采样，再按时间戳把三路结果对齐，才能把“连续两次交头接耳”识别成一个事件，而不是两个碎片。</li><li><b>报告比模型更难做</b>：异常片段要自动截取并绑定事件号，否则监管拿到的还是一堆时间点，等于没交付。</li></ul></div>
   </div>
 </div>
 </div>
   
 <div class="card" id="p02" data-cat="算法类" data-kind="repro" data-stage="02" data-tech="大模型全链路工程手册 从数据配比到 KV Cache：把训练、微调、对齐、推理、评测串成一条能复现的链路 LoRA / QLoRA：rank / alpha / target_modules 的取舍；4bit NF4 + 双重量化 + paged optimizer，单卡跑 6B SFT 数据配比：按难度分层做课程学习，先易后难 + 回放防遗忘 DPO：β 与参考模型的关系，偏好对构造比超参更影响结果 KV Cache / 投机采样：显存 ≈ 2 × layers × heads × head_dim × seq_len × batch × dtype；接受率决定加速比 评测：golden set + LLM-as-Judge + 人工抽检三层，避免单一指标失真">
   <div class="card-top">
-    <div class="card-meta"><span class="badge repro">课程实战复现</span>
-      <span>02</span><span>·</span><span>算法类</span><span>·</span><span>个人项目 · 165 章技术体系 + 实验复现 · 2024 – 2026</span></div>
+    <div class="card-meta"><span class="badge repro">基于开源的二次开发</span>
+      <span>02</span><span>·</span><span>算法类</span><span>·</span><span>个人项目 · 独立撰写 · 165 章实验复现 · 2024 – 2026</span></div>
     <h3>大模型全链路工程手册</h3>
     <p class="sub">从数据配比到 KV Cache：把训练、微调、对齐、推理、评测串成一条能复现的链路</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>市面上的“大模型教程”大多停在 API 调用和提示词技巧。这套把训练、对齐、推理、评测每一段的参数与实验都跑通并记下来——165 章，每章都能落成一个可复现的实验。</p></div>
   </div>
   <div class="card-body">
-    <div class="contrib"><div class="ch">我的角色与核心贡献<b>165 章技术体系 + 实验复现</b></div><ul><li><b>搭体系</b>：自己把散落的论文与课程整理成 5 系列 165 章，每个环节都落到「参数怎么选、实验怎么设计」</li><li><b>做复现</b>：QLoRA 微调 ChatGLM3-6B、PEFT、量化、DeepSpeed、MoE 逐项跑通，记录显存 / 吞吐 / 精度变化</li><li><b>给判断</b>：把选型边界写成可查的结论——什么时候 LoRA 够用、什么时候必须全参、DPO 与 RLHF 差在哪</li></ul></div>
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>讲概念、转述论文结论</li><li>只讲“LoRA 好用、省显存”</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>每个环节回答三个工程问题：参数怎么选、实验怎么设计、指标怎么读</li><li>给出 LoRA / QLoRA / 全参的显存与效果边界，说明什么时候必须上全参</li></ul></div></div>
+    <div class="contrib"><div class="ch">我的角色与核心贡献<b>独立撰写 · 165 章实验复现</b></div><ul><li><b>搭体系</b>：自己把散落的论文与课程整理成 5 系列 165 章，每个环节都落到「参数怎么选、实验怎么设计」</li><li><b>做复现</b>：QLoRA 微调 ChatGLM3-6B、PEFT、量化、DeepSpeed、MoE 逐项跑通，记录显存 / 吞吐 / 精度变化</li><li><b>给判断</b>：把选型边界写成可查的结论——什么时候 LoRA 够用、什么时候必须全参、DPO 与 RLHF 差在哪</li></ul></div>
     <div class="grid2">
       <div>
         <div class="blk"><h4>项目背景</h4><p>大模型落地最常断在两个地方：会用 API 但不懂训练，看得懂论文但跑不动实验。数据怎么配、LoRA 怎么设、DPO 为什么比 RLHF 省、KV Cache 到底吃多少显存——这些问题不打通，工程上就只能猜。</p></div>
@@ -595,6 +646,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="18
     <div class="blk"><h4>基础原理与架构</h4><p>链路是：数据工程 → SFT（LoRA/QLoRA）→ 偏好对齐（DPO/RLHF）→ 推理优化（量化 / KV Cache / 投机采样）→ 评测闭环。每个环节的输出都是下一环节的输入，评测结果反哺数据配比，形成闭环。</p><div class="fig"><div class="fig-title">预训练 → SFT → 偏好对齐 → 推理 → 评测</div>
 <svg viewBox="0 0 720 250" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="10" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="10" y="20" width="132" height="4" rx="2" fill="#0E7C86"/><text x="76" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">数据工程</text><text x="76" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">清洗 / 标注 / 配比</text><path d="M144 52 L154 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><path d="M151 49 L155 52 L151 55" fill="none" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="150" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="150" y="20" width="132" height="4" rx="2" fill="#0E7C86"/><text x="216" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">SFT 微调</text><text x="216" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">LoRA / QLoRA</text><path d="M284 52 L294 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><path d="M291 49 L295 52 L291 55" fill="none" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="290" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="290" y="20" width="132" height="4" rx="2" fill="#D98A1F"/><text x="356" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">偏好对齐</text><text x="356" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">RLHF / DPO</text><path d="M424 52 L434 52" stroke="#D98A1F" stroke-width="1.4" opacity=".5"/><path d="M431 49 L435 52 L431 55" fill="none" stroke="#D98A1F" stroke-width="1.4" opacity=".5"/><rect x="430" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="430" y="20" width="132" height="4" rx="2" fill="#12324E"/><text x="496" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">推理优化</text><text x="496" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">量化 / KV Cache</text><path d="M564 52 L574 52" stroke="#12324E" stroke-width="1.4" opacity=".5"/><path d="M571 49 L575 52 L571 55" fill="none" stroke="#12324E" stroke-width="1.4" opacity=".5"/><rect x="570" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="570" y="20" width="132" height="4" rx="2" fill="#12324E"/><text x="636" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">评测闭环</text><text x="636" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">golden set</text><line x1="10" y1="108" x2="710" y2="108" stroke="#E6E2D8"/><text x="10" y="132" font-size="10" letter-spacing="1" fill="#6B7280">章节产出（共 165 章）</text><rect x="10" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="16" y="159" font-size="10" font-weight="700" fill="#12324E">推理优化 · 30</text><rect x="152" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="158" y="159" font-size="10" font-weight="700" fill="#12324E">数据工程 · 30</text><rect x="294" y="146" width="90.2" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="300" y="159" font-size="10" font-weight="700" fill="#12324E">LoRA/QLoRA · 41</text><rect x="436" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="442" y="159" font-size="10" font-weight="700" fill="#12324E">DPO · 30</text><rect x="578" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="584" y="159" font-size="10" font-weight="700" fill="#12324E">SFT 配比 · 30</text><text x="10" y="196" font-size="10.5" fill="#6B7280">每个环节都落到“参数怎么选、实验怎么设计、指标怎么读”，而不是只讲概念。</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>从“记笔记”改成“做实验”</b>：一开始是读书笔记，写完发现记不住也用不上。改成每章配一个可跑的实验（QLoRA 微调 ChatGLM3-6B、PEFT、DeepSpeed、MoE），记录显存、吞吐、精度变化，才攒出可用的判断。</li><li><b>DPO 的关键不在 β</b>：调 β 的收益很有限，偏好对的构造（同题两答之间的质量差）才是主要变量。这个认知是多轮对比实验之后才扭转过来的。</li><li><b>评测必须三层</b>：golden set + LLM-as-Judge + 人工抽检，任何单一指标都会被刷分。</li></ul></div>
   </div>
 </div>
 </div></section>
@@ -609,8 +661,10 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="10
       <span>03</span><span>·</span><span>开发类</span><span>·</span><span>广州市政府采购中心 · 平台架构师 / 首席创新官 · 2022.10 – 2026.07</span><a class="repo" href="https://github.com/Sheroisshero/Caiyi-Agent-Platform" target="_blank" rel="noopener">查看代码 ↗</a></div>
     <h3>彩翼 · 公共采购智能体协同管理平台</h3>
     <p class="sub">全国首个公共采购智能体平台：从 0 到 1 搭起“智能体 + 数据 + 算力”的协同底座</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>公共采购是“错一次就是合规事故”的场景，行业里没人敢把通用智能体直接接进去。这套先做准入、权限、计费、留痕的底座，才敢让 AI 上生产——这是它和普通采购问答工具的分界线。</p></div>
   </div>
   <div class="card-body">
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>做一个采购问答机器人、一个文件审查工具</li><li>单一大模型一把梭，什么请求都它接</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>面向监管、采购人、代理机构、供应商四类主体的协同平台，第三方智能体须过五级准入</li><li>L1–L4 意图分级路由：低置信度才升级到更强模型，单次推理成本压到 10 元以内</li></ul></div></div>
     <div class="contrib"><div class="ch">我的角色与核心贡献<b>平台架构师 / 首席创新官</b></div><ul><li><b>定架构</b>：设计五层架构（数据基座 → 模型基座 → 平台 → 应用管理 → 生态），把准入、算力、数据放进同一底座</li><li><b>抓合规</b>：用 RAG 混合检索替代规则引擎，合规审查精确率 28% → 98.5%，并建 2000 条标注集做回归</li><li><b>推上线</b>：推动 13 个智能体协同上线，覆盖交易额 100 亿+，沉淀软著 6 项、专利 6 项</li></ul></div>
     <div class="grid2">
       <div>
@@ -628,6 +682,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><line x1="0
     <div class="blk"><h4>基础原理与架构</h4><p>五层架构自下而上：数据基座层负责托管、治理与共享交换；模型基座层做多模型接入与异构算力调度；平台层提供任务编排、RAG 检索、规则推理、OCR；应用管理层管准入、权限、计费、日志；生态应用层承载自研与第三方智能体。</p><div class="fig"><div class="fig-title"></div>
 <svg viewBox="0 0 470 282" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0" y="6" width="470" height="46" rx="9" fill="#0E7C86" opacity=".10"/><rect x="0" y="6" width="4" height="46" rx="2" fill="#0E7C86"/><text x="16" y="33.0" font-size="12" font-weight="700" fill="#101827">生态应用层</text><text x="456" y="33.0" font-size="10" fill="#6B7280" text-anchor="end">自研智能体 · 第三方智能体 · 可信数据空间</text><rect x="0" y="60" width="470" height="46" rx="9" fill="#12324E" opacity=".10"/><rect x="0" y="60" width="4" height="46" rx="2" fill="#12324E"/><text x="16" y="87.0" font-size="12" font-weight="700" fill="#101827">应用管理层</text><text x="456" y="87.0" font-size="10" fill="#6B7280" text-anchor="end">智能体准入 · 权限 · 计费 · 日志 · 对账</text><rect x="0" y="114" width="470" height="46" rx="9" fill="#12324E" opacity=".10"/><rect x="0" y="114" width="4" height="46" rx="2" fill="#12324E"/><text x="16" y="141.0" font-size="12" font-weight="700" fill="#101827">平台层</text><text x="456" y="141.0" font-size="10" fill="#6B7280" text-anchor="end">任务编排 · RAG 检索 · 规则推理 · OCR · CoT</text><rect x="0" y="168" width="470" height="46" rx="9" fill="#D98A1F" opacity=".10"/><rect x="0" y="168" width="4" height="46" rx="2" fill="#D98A1F"/><text x="16" y="195.0" font-size="12" font-weight="700" fill="#101827">模型基座层</text><text x="456" y="195.0" font-size="10" fill="#6B7280" text-anchor="end">多模型接入 · 算力调度 · 视觉 / OCR 能力</text><rect x="0" y="222" width="470" height="46" rx="9" fill="#D98A1F" opacity=".10"/><rect x="0" y="222" width="4" height="46" rx="2" fill="#D98A1F"/><text x="16" y="249.0" font-size="12" font-weight="700" fill="#101827">数据基座层</text><text x="456" y="249.0" font-size="10" fill="#6B7280" text-anchor="end">数据托管 · 治理 · 共享交换 · 可视化</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>从规则引擎到混合检索，精确率 28% → 98.5%</b>：规则覆盖不了采购文件的表述变体。换成向量 + BM25 + 知识图谱 + 重排、按场景调权重后，Top-5 召回 89%。但纯向量会漏掉条款号这类精确匹配，所以 BM25 始终没敢去掉。</li><li><b>第三方智能体不是“审文档”就够</b>：改成资质 → 技术 → 合规 → 场景实测 → 试运行五级，出问题能定位到是模型、数据还是编排。</li><li><b>智能体越多，越依赖路由</b>：13 个智能体协同，靠一个大模型分派会互相抢活。按意图置信度分级，低置信度明确升级，而不是硬答。</li></ul></div>
   </div>
 </div>
 </div>
@@ -635,12 +690,14 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0"
 <div class="card" id="p04" data-cat="开发类" data-kind="self" data-stage="01" data-tech="EchoMind · 多 Agent 客服运行时 可观测、可评测、可降级：把“聊天壳”做成一套能运营的系统 三路意图：规则兜底、向量召回相似问、LLM 判语义，三路投票 + 置信度校准 路由降权：某 Agent 近期失败率升高时自动降权，把流量切给备用 Agent 记忆写入策略：只写“可复用的事实”，避免把寒暄灌进长期记忆 Skills 热加载：业务规则不改代码，reload 即生效 工具层：TTL 缓存 + 熔断 + 结果重排，防止单工具拖垮整条链路 评测：意图 / 路由 / 答案可用 / 拒答得当四类指标分开看">
   <div class="card-top">
     <div class="card-meta"><span class="badge self">自研</span>
-      <span>04</span><span>·</span><span>开发类</span><span>·</span><span>个人项目 · Python FastAPI + Java + React · 2026</span></div>
+      <span>04</span><span>·</span><span>开发类</span><span>·</span><span>个人项目 · 独立设计 · 全栈实现（FastAPI / Java / React） · 2026</span></div>
     <h3>EchoMind · 多 Agent 客服运行时</h3>
     <p class="sub">可观测、可评测、可降级：把“聊天壳”做成一套能运营的系统</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>客服机器人满地都是，但“出错能定位、能自动降级、能被评测”的运行时很少。这套把可观测性当成一等公民——它回答的不是“能不能答”，而是“答错了怎么办”。</p></div>
   </div>
   <div class="card-body">
-    <div class="contrib"><div class="ch">我的角色与核心贡献<b>Python FastAPI + Java + React</b></div><ul><li><b>从零写</b>：意图三路融合、Agent 路由、记忆分层、工具层，全栈 Python FastAPI + Java + React 自己实现</li><li><b>拆问题</b>：把「答非所问」拆成意图 / 路由 / 答案可用 / 拒答四类指标，分开定位、分开优化</li><li><b>做成能运营的</b>：加路由降权与 LLM-as-Judge 评测，系统出问题能定位、能降级、能回归</li></ul></div>
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>一个大模型 + 一个知识库，所有问题走同一个 prompt</li><li>把历史对话全部塞进长上下文</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>意图先判，再决定要不要检索、路由到哪个 Agent、注入哪套 Skills</li><li>记忆分三层（工作 / 情景 / 画像），只写“可复用的事实”，避免寒暄污染检索</li></ul></div></div>
+    <div class="contrib"><div class="ch">我的角色与核心贡献<b>独立设计 · 全栈实现（FastAPI / Java / React）</b></div><ul><li><b>从零写</b>：意图三路融合、Agent 路由、记忆分层、工具层，全栈 Python FastAPI + Java + React 自己实现</li><li><b>拆问题</b>：把「答非所问」拆成意图 / 路由 / 答案可用 / 拒答四类指标，分开定位、分开优化</li><li><b>做成能运营的</b>：加路由降权与 LLM-as-Judge 评测，系统出问题能定位、能降级、能回归</li></ul></div>
     <div class="grid2">
       <div>
         <div class="blk"><h4>项目背景</h4><p>大多数客服机器人是单轮问答壳：问价格能答，一问到跨业务的组合问题就答非所问。根因不是模型不行，而是意图、知识、工具、记忆、评测这五件事没有编排在一起，出了问题也没法定位。</p></div>
@@ -657,6 +714,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0"
     <div class="blk"><h4>基础原理与架构</h4><p>请求进入后先读记忆，再做意图识别；按意图决定是否检索知识库，然后路由到对应 Agent；Skills 按意图注入，工具层带缓存、熔断、重排；回复生成后写回记忆，同时进监控与评测。</p><div class="fig"><div class="fig-title">EchoMind 请求主链路与旁挂能力</div>
 <svg viewBox="0 0 720 300" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="60.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">请求</text><text x="60.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">/chat</text><path d="M113 53 L130 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="128" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="180.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">记忆读取</text><text x="180.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">工作/情景/画像</text><path d="M233 53 L250 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="258" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="310.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">意图识别</text><text x="310.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">规则+向量+LLM</text><path d="M363 53 L380 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="388" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="440.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">知识检索</text><text x="440.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">按意图触发</text><path d="M493 53 L510 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="518" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="570.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">Agent 路由</text><text x="570.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">4 类 Agent</text><path d="M623 53 L640 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="632" y="18" width="96" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="680.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">回复 + 写回</text><text x="680.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">Redis/Chroma</text><rect x="8" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="18" y="137" font-size="10.5" font-weight="700" fill="#12324E">Skills 热加载</text><text x="18" y="152" font-size="9" fill="#6B7280">业务规则动态注入</text><rect x="258" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="268" y="137" font-size="10.5" font-weight="700" fill="#12324E">工具层</text><text x="268" y="152" font-size="9" fill="#6B7280">缓存 / 熔断 / 重排</text><rect x="388" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="398" y="137" font-size="10.5" font-weight="700" fill="#12324E">监控</text><text x="398" y="152" font-size="9" fill="#6B7280">在线指标 + 路由降权</text><rect x="518" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="528" y="137" font-size="10.5" font-weight="700" fill="#12324E">评测</text><text x="528" y="152" font-size="9" fill="#6B7280">LLM-as-Judge</text><text x="8" y="200" font-size="10" letter-spacing="1" fill="#6B7280">记忆分层</text><rect x="8" y="214" width="192" height="44" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="18" y="233" font-size="10.5" font-weight="700" fill="#101827">工作记忆</text><text x="18" y="247" font-size="9" fill="#6B7280">当前会话上下文</text><rect x="208" y="214" width="192" height="44" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="218" y="233" font-size="10.5" font-weight="700" fill="#101827">情景记忆</text><text x="218" y="247" font-size="9" fill="#6B7280">历史事件摘要</text><rect x="408" y="214" width="192" height="44" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="418" y="233" font-size="10.5" font-weight="700" fill="#101827">用户画像</text><text x="418" y="247" font-size="9" fill="#6B7280">稳定偏好与标签</text><text x="8" y="278" font-size="10.5" fill="#6B7280">关键点：意图决定要不要检索、走哪个 Agent、注入哪套 Skills——而不是所有问题都丢给一个大模型。</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>意图识别不能只靠大模型</b>：纯 LLM 判意图在边界样本上抖动得厉害。改成规则兜底 + 向量召回相似问 + LLM 判语义，三路投票并校准置信度，才稳到 91%。</li><li><b>出了问题要能自动止损</b>：加了路由降权——某个 Agent 近期失败率升高就自动把流量切给备用，而不是等人工发现之后再去查。</li><li><b>记忆“写什么”比“怎么存”更难</b>：早期把所有对话都写进长期记忆，结果寒暄和无关信息污染检索。改成只写真能复用的事实，命中率才回来。</li></ul></div>
   </div>
 </div>
 </div></section>
@@ -667,13 +725,15 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8"
   
 <div class="card first" id="p05" data-cat="产品类" data-kind="repro" data-stage="01" data-tech="问对 · 访谈实时辅导 访谈进行时，它替你想着下一个问题 流式 ASR：分段送音 + 增量返回，字幕延迟控制在秒级 议题树：把访谈提纲拆成树，节点带“必问 / 可选 / 已覆盖”状态 提示生成：基于未覆盖节点 + 最近对话，约束模型只问一个问题 报告结构：背景 / 现状 / 痛点 / 约束 / 决策链 / 下一步 部署：Docker Compose + Nginx，ASR/LLM/OCR 三个配置档可切换 二次开发定位：在原开源项目基础上做场景化配置与交付流程改造，不冒充原创">
   <div class="card-top">
-    <div class="card-meta"><span class="badge repro">开源二次开发</span>
-      <span>05</span><span>·</span><span>产品类</span><span>·</span><span>个人产品化改造 · 基于开源 xiaozhi-fde-talk · 2026</span></div>
+    <div class="card-meta"><span class="badge repro">基于开源的二次开发</span>
+      <span>05</span><span>·</span><span>产品类</span><span>·</span><span>个人产品化改造 · 二次开发 · 场景化改造 · 2026</span></div>
     <h3>问对 · 访谈实时辅导</h3>
     <p class="sub">访谈进行时，它替你想着下一个问题</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>录音转写工具解决的是“记下来”，但访谈真正的损耗是“问漏了”。这套的价值在于访谈还没结束，就告诉你哪条关键约束没问到——而且语音不出内网，能直接带进受监管客户的现场。</p></div>
   </div>
   <div class="card-body">
-    <div class="contrib"><div class="ch">我的角色与核心贡献<b>基于开源 xiaozhi-fde-talk</b></div><ul><li><b>选基线</b>：认定 xiaozhi-fde-talk 的流式链路可用，把精力放在场景化改造而不是重写一遍</li><li><b>补核心</b>：设计议题树 + 覆盖度计算，让提示只问一个未覆盖的问题，而不是泛泛给建议</li><li><b>做交付</b>：串起 ASR → 辅导 → 报告 → 导出与 Docker 部署，让 FDE 能直接带进客户现场</li></ul></div>
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>会后转写、生成摘要，人再回头整理</li><li>云端 ASR，数据要出内网</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>会中实时判断议题覆盖度，边聊边提示“下一个该问什么”</li><li>FunASR 本地流式推理，满足受监管行业的现场交付前提</li></ul></div></div>
+    <div class="contrib"><div class="ch">我的角色与核心贡献<b>二次开发 · 场景化改造</b></div><ul><li><b>选基线</b>：认定 xiaozhi-fde-talk 的流式链路可用，把精力放在场景化改造而不是重写一遍</li><li><b>补核心</b>：设计议题树 + 覆盖度计算，让提示只问一个未覆盖的问题，而不是泛泛给建议</li><li><b>做交付</b>：串起 ASR → 辅导 → 报告 → 导出与 Docker 部署，让 FDE 能直接带进客户现场</li></ul></div>
     <div class="grid2">
       <div>
         <div class="blk"><h4>项目背景</h4><p>FDE、售前、咨询每天在做客户访谈，但访谈质量高度依赖个人经验：新手容易漏问关键约束，老手也常在被带偏后忘记回到提纲。录音转写工具只解决“记下来”，解决不了“问到位”。</p></div>
@@ -688,19 +748,22 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8"
     <div class="blk"><h4>基础原理与架构</h4><p>前端负责实时录音与字幕上屏，WebSocket 推流到后端；ASR 流式转写后进入辅导引擎，引擎按议题树计算覆盖度、生成提示；会话结束后汇总为结构化报告并导出。</p><div class="fig"><div class="fig-title">访谈前 / 中 / 后三段价值</div>
 <svg viewBox="0 0 700 250" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="12" y="18" width="206" height="170" rx="12" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="12" y="18" width="206" height="5" rx="2" fill="#6B7280"/><text x="28" y="46" font-size="12" font-weight="700" fill="#101827">访谈前</text><circle cx="32" cy="66" r="3" fill="#6B7280" opacity=".6"/><text x="44" y="70" font-size="10.5" fill="#26303F">结构化提纲</text><circle cx="32" cy="90" r="3" fill="#6B7280" opacity=".6"/><text x="44" y="94" font-size="10.5" fill="#26303F">议题树 + 必问项</text><rect x="244" y="18" width="206" height="170" rx="12" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="244" y="18" width="206" height="5" rx="2" fill="#0E7C86"/><text x="260" y="46" font-size="12" font-weight="700" fill="#101827">访谈中</text><circle cx="264" cy="66" r="3" fill="#0E7C86" opacity=".6"/><text x="276" y="70" font-size="10.5" fill="#26303F">实时转写</text><circle cx="264" cy="90" r="3" fill="#0E7C86" opacity=".6"/><text x="276" y="94" font-size="10.5" fill="#26303F">缺口识别</text><circle cx="264" cy="114" r="3" fill="#0E7C86" opacity=".6"/><text x="276" y="118" font-size="10.5" fill="#26303F">下一问提示</text><rect x="476" y="18" width="206" height="170" rx="12" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="476" y="18" width="206" height="5" rx="2" fill="#D98A1F"/><text x="492" y="46" font-size="12" font-weight="700" fill="#101827">访谈后</text><circle cx="496" cy="66" r="3" fill="#D98A1F" opacity=".6"/><text x="508" y="70" font-size="10.5" fill="#26303F">结构化报告</text><circle cx="496" cy="90" r="3" fill="#D98A1F" opacity=".6"/><text x="508" y="94" font-size="10.5" fill="#26303F">MD / HTML / Word</text><path d="M222 96 L240 96" stroke="#0E7C86" stroke-width="1.5" opacity=".5"/><path d="M454 96 L472 96" stroke="#D98A1F" stroke-width="1.5" opacity=".5"/><text x="12" y="216" font-size="10.5" fill="#6B7280">价值不在“转写”，在于把访谈从“靠记忆”变成“有提纲、有提示、有交付物”。</text><text x="12" y="236" font-size="10.5" fill="#6B7280">FunASR 本地推理，语音数据不出内网——这是 FDE / 售前能带进客户现场的前提。</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>从“总结”转向“提问”</b>：一开始做的是会后纪要，做完发现客户真正肯付钱的是“这次访谈别白谈”。把重心移到议题树与覆盖度判断上，产品才立住。</li><li><b>提示一次只能给一个问题</b>：早期一次甩三条建议，人在对话中根本来不及看。约束模型只输出一个问题，可用性才上来。</li><li><b>报告结构必须先定死</b>：背景 / 现状 / 痛点 / 约束 / 决策链 / 下一步——先定结构再让模型填，比让模型自由发挥稳定得多。</li></ul></div>
   </div>
 </div>
 </div>
   
 <div class="card" id="p06" data-cat="产品类" data-kind="repro" data-stage="05" data-tech="知栈 · 企业知识库问答 每个答案都能回到原文 切片：RecursiveCharacterTextSplitter，按标点与段落递归，保留 chunkNo 便于回溯 检索：按 kbId 过滤后再做相似度，避免跨库串答案 流式：SSE 推送 token，前端边收边渲染，首字延迟明显下降 契约层：Zod schema + 共享 DTO，前后端不靠口头约定 FDE 视角：先问规模与运维现状，再决定要不要引入专用向量库 评测：以“答案可回溯到原文片段”为第一标准，而不是只看回答流畅度">
   <div class="card-top">
-    <div class="card-meta"><span class="badge repro">课程实战复现</span>
-      <span>06</span><span>·</span><span>产品类</span><span>·</span><span>个人工程复现 · React 19 + NestJS + LangChain.js + pgvector · 2026</span></div>
+    <div class="card-meta"><span class="badge repro">基于开源的二次开发</span>
+      <span>06</span><span>·</span><span>产品类</span><span>·</span><span>个人项目 · 二次开发 · React + NestJS 全栈实现 · 2026</span></div>
     <h3>知栈 · 企业知识库问答</h3>
     <p class="sub">每个答案都能回到原文</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>搭一个 RAG demo 人人都会，难的是两件事：每个答案能回到原文，以及只有一套存储。这两条决定它是玩具还是能进企业系统——少一类双写事故，就少一类线上疑难。</p></div>
   </div>
   <div class="card-body">
-    <div class="contrib"><div class="ch">我的角色与核心贡献<b>React 19 + NestJS + LangChain.js + pgvector</b></div><ul><li><b>做选型</b>：对比专用向量库与 pgvector 同库，按规模与运维成本给结论，而不是照抄方案</li><li><b>搭全栈</b>：React 19 + NestJS + LangChain.js 四层链路，SSE 流式 + Zod 契约，前后端不靠口头约定</li><li><b>守标准</b>：以「答案能回到原文片段」为第一评测标准，chunk 元数据带 kbId / chunkNo 支持回溯</li></ul></div>
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>专用向量库 + 业务库，两套存储双写</li><li>以“回答像不像人”为验收标准</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>PostgreSQL + pgvector 同库：业务表与向量表事务一致，运维只有一份</li><li>以“答案能否回溯到原文片段”为第一标准，检索按 kbId 先过滤再算相似度</li></ul></div></div>
+    <div class="contrib"><div class="ch">我的角色与核心贡献<b>二次开发 · React + NestJS 全栈实现</b></div><ul><li><b>做选型</b>：对比专用向量库与 pgvector 同库，按规模与运维成本给结论，而不是照抄方案</li><li><b>搭全栈</b>：React 19 + NestJS + LangChain.js 四层链路，SSE 流式 + Zod 契约，前后端不靠口头约定</li><li><b>守标准</b>：以「答案能回到原文片段」为第一评测标准，chunk 元数据带 kbId / chunkNo 支持回溯</li></ul></div>
     <div class="grid2">
       <div>
         <div class="blk"><h4>项目背景</h4><p>企业知识散在 PDF、Excel、Wiki 里，搜索靠关键词，问一句“这个流程要走几步”就只能人工翻。专用向量库方案又要多维护一套存储，业务库和向量库双写，一致性出了问题很难查。</p></div>
@@ -717,6 +780,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="16
     <div class="blk"><h4>基础原理与架构</h4><p>前端 React 19 做知识库、文档、切片、检索、问答五个页面；API 层 NestJS 提供 SSE 问答、CSV/XLSX 入库；RAG 引擎用 LangChain.js 串起 Loader → Splitter → Embedding → Retrieval → Prompt；存储层用 pgvector 表存向量与元数据。</p><div class="fig"><div class="fig-title">四层架构：前端 / API / RAG 引擎 / PG + pgvector</div>
 <svg viewBox="0 0 700 290" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="14" y="14" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="14" width="5" height="52" rx="2" fill="#0E7C86"/><text x="32" y="36" font-size="11.5" font-weight="700" fill="#101827">Web 前端</text><text x="32" y="53" font-size="9.5" fill="#6B7280">React 19 · 知识库 / 文档 / 切片 / 问答</text><path d="M350 67 L350 75" stroke="#0E7C86" stroke-width="1.2" opacity=".4"/><rect x="14" y="76" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="76" width="5" height="52" rx="2" fill="#0E7C86"/><text x="32" y="98" font-size="11.5" font-weight="700" fill="#101827">API 层</text><text x="32" y="115" font-size="9.5" fill="#6B7280">NestJS · SSE 流式 · 入库 / 检索 / 问答</text><path d="M350 129 L350 137" stroke="#0E7C86" stroke-width="1.2" opacity=".4"/><rect x="14" y="138" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="138" width="5" height="52" rx="2" fill="#12324E"/><text x="32" y="160" font-size="11.5" font-weight="700" fill="#101827">RAG 引擎</text><text x="32" y="177" font-size="9.5" fill="#6B7280">LangChain.js · Loader → Splitter → Embedding → Retrieval → Prompt</text><path d="M350 191 L350 199" stroke="#12324E" stroke-width="1.2" opacity=".4"/><rect x="14" y="200" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="200" width="5" height="52" rx="2" fill="#D98A1F"/><text x="32" y="222" font-size="11.5" font-weight="700" fill="#101827">存储层</text><text x="32" y="239" font-size="9.5" fill="#6B7280">PostgreSQL + pgvector（业务表与向量表同库）</text><text x="14" y="270" font-size="10" fill="#6B7280">同一份 PostgreSQL 里既有 knowledge_bases / documents，也有 rag_chunks 向量表——少一套双写，就少一类一致性事故。</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>双库的代价被低估了</b>：向量库和业务库分开，chunk 与文档元数据要双写，一旦某次写失败就出现“答得出但找不到原文”。合并到一份 PG 之后，事务一致把这类问题从根上消掉——这是选型，不是技术炫技。</li><li><b>检索顺序错了会串答案</b>：先全库算相似度再按 kbId 过滤，看起来答得好，其实串了别的项目。改成先过滤再检索，正确率才稳定。</li><li><b>流式不是炫技</b>：SSE 让首字延迟明显下降。知识库产品最容易被放弃的瞬间，就是等答案那几秒。</li></ul></div>
   </div>
 </div>
 </div></section>
@@ -731,8 +795,10 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="14
       <span>07</span><span>·</span><span>数据类</span><span>·</span><span>广州市政府采购中心 · 数据治理负责人 · 2023 – 2026</span></div>
     <h3>政务采购数据治理</h3>
     <p class="sub">先把数据变成能用的资产，再谈模型</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>模型效果的上限由数据决定。这个项目真正的价值不是“治理了多少条”，而是证明了：把 76.3 万条公告治理成资产，比换一个更强的模型更能提升效果——而且这些数据能同时供检索、训练和评测用。</p></div>
   </div>
   <div class="card-body">
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>写 SQL 抽数、做个看板就算数据治理</li><li>模型好不好靠感觉判断</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>六阶段（盘点→标准→清洗→主数据→质量→安全）+ 元数据血缘，改表前先看下游影响</li><li>沉淀 2,000 条标注样本，让“效果”有基准，而不是每次换模型都重新拍脑袋</li></ul></div></div>
     <div class="contrib"><div class="ch">我的角色与核心贡献<b>数据治理负责人</b></div><ul><li><b>定方法</b>：把治理拆成盘点 → 标准 → 清洗 → 主数据 → 质量 → 安全六阶段，每阶段有可交付物</li><li><b>落标准</b>：数据元、代码项、编码规则、命名规范四类标准，统一跨系统口径</li><li><b>备弹药</b>：治理 76.3 万条公告、53.6 万份合同，沉淀 2000 条标注样本，让模型评测有基准</li></ul></div>
     <div class="grid2">
       <div>
@@ -750,6 +816,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0"
     <div class="blk"><h4>基础原理与架构</h4><p>六阶段流水线：先做业务调研与数据盘点（系统级 → 表级 → 字段级），再定标准，然后清洗与整合，抽取主数据（供应商、项目、商品），建立质量规则与监控，最后做分级分类与脱敏，形成可共享的数据资产。</p><div class="fig"><div class="fig-title"></div>
 <svg viewBox="0 0 720 126" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="0.0" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="54.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">盘点</text><text x="54.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">4 渠道 6 库</text><path d="M110.3 63 L119.3 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M116.3 59 L120.3 63 L116.3 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="122.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="122.3" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="176.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">标准</text><text x="176.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">数据元 / 代码项</text><path d="M232.7 63 L241.7 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M238.7 59 L242.7 63 L238.7 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="244.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="244.7" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="298.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">清洗</text><text x="298.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">去重 / 补全</text><path d="M355.0 63 L364.0 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M361.0 59 L365.0 63 L361.0 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="367.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="367.0" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="421.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">主数据</text><text x="421.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">供应商 / 项目</text><path d="M477.3 63 L486.3 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M483.3 59 L487.3 63 L483.3 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="489.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="489.3" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="543.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">质量</text><text x="543.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">规则 + 监控</text><path d="M599.7 63 L608.7 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M605.7 59 L609.7 63 L605.7 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="611.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="611.7" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="665.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">安全</text><text x="665.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">分级 / 脱敏</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>先定标准，再清洗</b>：一开始边清边定规则，同一个字段在不同表里出现三种口径，越清越乱。改成先建数据元 / 代码项 / 编码规则 / 命名规范四类标准再动手，返工量大幅下降。</li><li><b>加工策略要按更新频率选</b>：全删全插、切片追加、拉链表三种各有适用场景，选错的代价是每天全量重跑。</li><li><b>质量规则必须能告警</b>：完整性、唯一性、一致性、及时性四类规则配上监控——没有告警的规则等于没写，数据坏了没人知道。</li></ul></div>
   </div>
 </div>
 </div>
@@ -760,8 +827,10 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0.
       <span>08</span><span>·</span><span>数据类</span><span>·</span><span>新加坡国立大学 · 研究助理 · Abel Yang 教授指导 · 2026.08 – 至今</span></div>
     <h3>47,950 条文本的 LLM 辅助编码</h3>
     <p class="sub">让大模型做初筛，让人只处理分歧</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>让大模型做定性研究，最容易出的问题不是慢，是“编得头头是道却没有依据”。这套把人的判断留在了关键位置：机器负责覆盖，人负责判断——定性研究的方法论底线没有让步。</p></div>
   </div>
   <div class="card-body">
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>把文本整批丢给 LLM 打标签，报一个准确率</li><li>宣称“AI 替代人工编码”</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>Embedding 先聚类分堆，再按编码本初筛，强制引用原文片段；κ 0.86 + 覆盖 91% + 复核成本 18% 三维一起看</li><li>明确人机边界：价值判断类编码只做辅助，不做自动定论</li></ul></div></div>
     <div class="contrib"><div class="ch">我的角色与核心贡献<b>研究助理 · Abel Yang 教授指导</b></div><ul><li><b>改流程</b>：把传统开放式 → 轴心 → 选择性编码拆成可自动化步骤，人只处理分歧样本</li><li><b>定边界</b>：给模型正反例 + 强制引用原文，涉及价值判断的编码只做辅助、不做定论</li><li><b>控质量</b>：Cohen's kappa 0.86、主题覆盖 91%、人工复核压到 18%，在 47,950 条语料上验证</li></ul></div>
     <div class="grid2">
       <div>
@@ -779,6 +848,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0"
     <div class="blk"><h4>基础原理与架构</h4><p>语料 → 清洗与分块 → Embedding 聚类 → LLM 按编码本初筛 → 人工抽样复核与分歧处理 → 一致性计算 → 编码本修订 → 主题归纳。评测用三维指标：一致性、覆盖度、复核成本。</p><div class="fig"><div class="fig-title">LLM 辅助定性编码流程</div>
 <svg viewBox="0 0 700 240" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="10" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="89" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">语料准备</text><text x="89" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">47,950 条文本</text><path d="M170 55 L182 55" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="182" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="261" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">自动编码</text><text x="261" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">Embeddings + LLM</text><path d="M342 55 L354 55" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="354" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="433" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">一致性校验</text><text x="433" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">人工抽样复核</text><path d="M514 55 L526 55" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="526" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="605" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">主题归纳</text><text x="605" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">轴心 / 选择性编码</text><rect x="10" y="110" width="674" height="52" rx="9" fill="#0E7C86" opacity=".08"/><text x="24" y="132" font-size="10.5" font-weight="700" fill="#0E7C86">Human-in-the-Loop：机器全量初筛，人只处理分歧样本</text><text x="24" y="150" font-size="9.5" fill="#6B7280">抽样复核 → 计算一致性 → 修订编码本 → 再跑一遍，形成闭环</text><text x="10" y="190" font-size="10" fill="#6B7280">这套流程的价值：把定性研究从“几个月人工编码”压到“几天初筛 + 人工把关”。</text><text x="10" y="206" font-size="10" fill="#6B7280">同一套方法可直接迁移到研报解析、舆情归因、客服会话分析。</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>编码本必须先定死</b>：边标边改定义，一致性永远上不去。先把维度与取值固定，再让模型判断——κ 才做到 0.86。</li><li><b>让人只处理分歧</b>：机器全量初筛、人工只复核分歧样本，复核比例压到 18%。人机边界划清楚，成本才降得下来。</li><li><b>提示里必须给反例</b>：只给正例，模型会把相近但不对的文本也归进去；补上反例并强制引用原文，无据编造明显减少。</li></ul></div>
   </div>
 </div>
 </div></section>
@@ -789,13 +859,15 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="10
   
 <div class="card first" id="p09" data-cat="行业类" data-kind="repro" data-stage="06" data-tech="AI 量化交易系统 从因子到回测：把“看起来能赚”变成“能解释为什么赚” 因子处理：去极值 → 标准化 → 中性化，三步之后再进模型 有效性：IC / IR / 分层回测，三者一起看才不容易被骗 回测：walk-forward 滚动窗口，训练集与验证集严格分开 风控：最大回撤阈值、单票上限、行业偏离约束 LLM 事件抽取：公告 → 事件类型 / 影响方向 / 置信度，人工抽检 复盘：每轮回测记录参数、样本区间、失效原因，避免重复踩坑">
   <div class="card-top">
-    <div class="card-meta"><span class="badge repro">课程实战复现</span>
-      <span>09</span><span>·</span><span>行业类</span><span>·</span><span>个人项目 · 12 周训练营复现 + 改造 · 2026</span></div>
+    <div class="card-meta"><span class="badge repro">基于开源的二次开发</span>
+      <span>09</span><span>·</span><span>行业类</span><span>·</span><span>个人项目 · 二次开发 · 独立完成 · 2026</span></div>
     <h3>AI 量化交易系统</h3>
     <p class="sub">从因子到回测：把“看起来能赚”变成“能解释为什么赚”</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>课程项目最容易停在“回测曲线很漂亮”。这套的重点不在收益数字，而在两件更难的事：能不能解释为什么赚，以及换个样本区间还成不成立。</p></div>
   </div>
   <div class="card-body">
-    <div class="contrib"><div class="ch">我的角色与核心贡献<b>12 周训练营复现 + 改造</b></div><ul><li><b>走全链路</b>：数据 → 因子 → 组合 → 回测 → 风控 → 模拟执行，每段都有产出物，而不是只写因子</li><li><b>防过拟合</b>：walk-forward 滚动窗口 + 样本外验证，用 IC / IR / 分层回测判断因子有效性</li><li><b>加另类信号</b>：用 LLM 抽公告与研报事件（类型 / 方向 / 置信度），人工抽检后进入信号</li></ul></div>
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>单因子回测，调参调到收益最高</li><li>只盯收益曲线</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>walk-forward 滚动 + 样本外验证，因子有效性看 IC / IR，而不是只看年化</li><li>最大回撤、单票上限、行业偏离写进流程——风控是前置约束，不是事后解释</li></ul></div></div>
+    <div class="contrib"><div class="ch">我的角色与核心贡献<b>二次开发 · 独立完成</b></div><ul><li><b>走全链路</b>：数据 → 因子 → 组合 → 回测 → 风控 → 模拟执行，每段都有产出物，而不是只写因子</li><li><b>防过拟合</b>：walk-forward 滚动窗口 + 样本外验证，用 IC / IR / 分层回测判断因子有效性</li><li><b>加另类信号</b>：用 LLM 抽公告与研报事件（类型 / 方向 / 置信度），人工抽检后进入信号</li></ul></div>
     <div class="grid2">
       <div>
         <div class="blk"><h4>项目背景</h4><p>量化门槛高在“链路”：数据、因子、组合、回测、风控、执行每一段都有坑。只做因子不回测，不知道是不是过拟合；只做回测不控回撤，实盘拿不住。</p></div>
@@ -812,19 +884,22 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0"
     <div class="blk"><h4>基础原理与架构</h4><p>数据层拉行情与财务；因子层做动量、波动、质量三类因子并标准化；组合层按打分选股并加行业与个股权重约束；回测层用 walk-forward 滚动训练与验证；风控层设最大回撤、单票上限、换手上限；执行层做模拟盘验证。</p><div class="fig"><div class="fig-title"></div>
 <svg viewBox="0 0 720 126" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="0.0" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="54.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">数据</text><text x="54.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">行情 / 财务</text><path d="M110.3 63 L119.3 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M116.3 59 L120.3 63 L116.3 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="122.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="122.3" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="176.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">因子</text><text x="176.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">动量 / 波动 / 质量</text><path d="M232.7 63 L241.7 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M238.7 59 L242.7 63 L238.7 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="244.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="244.7" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="298.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">组合</text><text x="298.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">打分 / 约束</text><path d="M355.0 63 L364.0 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M361.0 59 L365.0 63 L361.0 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="367.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="367.0" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="421.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">回测</text><text x="421.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">walk-forward</text><path d="M477.3 63 L486.3 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M483.3 59 L487.3 63 L483.3 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="489.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="489.3" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="543.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">风控</text><text x="543.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">回撤 / 仓位</text><path d="M599.7 63 L608.7 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M605.7 59 L609.7 63 L605.7 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="611.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="611.7" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="665.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">执行</text><text x="665.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">模拟盘</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>先怀疑过拟合，再谈收益</b>：一开始盯着年化数字调参，后来发现换个窗口就崩。改成严格切分训练与验证、先看因子 IC 稳不稳，收益是结果不是目标。</li><li><b>因子处理顺序不能乱</b>：去极值 → 标准化 → 中性化，顺序颠倒会让中性化把有效信号一起抹掉。</li><li><b>LLM 只做事件抽取，不做方向判断</b>：公告 → 事件类型 / 影响方向 / 置信度，再人工抽检。让模型直接给买卖信号，等于把措辞当成 alpha。</li></ul></div>
   </div>
 </div>
 </div>
   
 <div class="card" id="p10" data-cat="行业类" data-kind="repro" data-stage="06" data-tech="金融风控算法模型 可解释、可监控、能上线：风控模型的三个硬约束 分箱：卡方分箱 + 单调性约束，避免“分箱很好看但业务讲不通” WOE / IV：IV 筛变量，WOE 让逻辑回归能处理非线性 评估：KS、AUC、提升度、跨期稳定性，四项缺一不可 监控：PSI &gt; 0.1 触发排查，KS 衰减超过阈值触发重训 拒绝推断：只有放款样本有表现，要用拒绝推断修正样本偏差 部署：批量（离线评分）、实时（API）、嵌入式（规则引擎内）">
   <div class="card-top">
-    <div class="card-meta"><span class="badge repro">课程实战复现</span>
-      <span>10</span><span>·</span><span>行业类</span><span>·</span><span>个人项目 · 评分卡 + 机器学习风控 + 部署 · 2026</span></div>
+    <div class="card-meta"><span class="badge repro">基于开源的二次开发</span>
+      <span>10</span><span>·</span><span>行业类</span><span>·</span><span>个人项目 · 独立复现 · 评分卡 + GBDT 全链路 · 2026</span></div>
     <h3>金融风控算法模型</h3>
     <p class="sub">可解释、可监控、能上线：风控模型的三个硬约束</p>
+    <div class="worth"><span class="wt">不重复的地方</span><p>风控模型的验收标准从来不是 AUC，而是“每一个拒绝理由都能解释给监管听”。这套把可解释性当成硬约束而不是加分项——评分卡保底，GBDT 提分，SHAP 补解释。</p></div>
   </div>
   <div class="card-body">
-    <div class="contrib"><div class="ch">我的角色与核心贡献<b>评分卡 + 机器学习风控 + 部署</b></div><ul><li><b>搭链路</b>：数据与标签 → 特征工程 → 模型 → 评估 → 监控 → 部署，六段完整复现</li><li><b>保可解释</b>：卡方分箱 + 单调性约束 + WOE，让每个拒绝理由能落到具体变量与分箱</li><li><b>建监控</b>：PSI 看漂移、KS 看衰减、坏账率看真实表现，三者一起判模型是否该迭代</li></ul></div>
+    <div class="diff"><div class="dc"><div class="dh">多数同类项目止步于此</div><ul><li>追 AUC，堆特征堆模型，最后说不清为什么拒</li><li>模型上线就结束</li></ul></div><div class="dc win"><div class="dh">这里往前多走了一步</div><ul><li>评分卡做可解释基线，GBDT 做区分度提升，SHAP 把黑盒的决策补回可解释</li><li>PSI 看分布漂移、KS 看区分度衰减、坏账率看真实表现——三者一起判是否该重训</li></ul></div></div>
+    <div class="contrib"><div class="ch">我的角色与核心贡献<b>独立复现 · 评分卡 + GBDT 全链路</b></div><ul><li><b>搭链路</b>：数据与标签 → 特征工程 → 模型 → 评估 → 监控 → 部署，六段完整复现</li><li><b>保可解释</b>：卡方分箱 + 单调性约束 + WOE，让每个拒绝理由能落到具体变量与分箱</li><li><b>建监控</b>：PSI 看漂移、KS 看衰减、坏账率看真实表现，三者一起判模型是否该迭代</li></ul></div>
     <div class="grid2">
       <div>
         <div class="blk"><h4>项目背景</h4><p>风控和推荐最大的区别是：推荐错了用户划走，风控错了要付出真金白银，还要能向监管解释。所以模型不只要能区分好坏，还要可解释、可监控、能部署。</p></div>
@@ -841,6 +916,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0"
     <div class="blk"><h4>基础原理与架构</h4><p>数据层整合申请、行为、征信三类数据并定义好坏标签；特征层做分箱、WOE 编码、IV 筛选；模型层用评分卡做基线、GBDT 做提升；评估层看 KS / AUC / 提升度；上线后持续监控 PSI 与 KS。</p><div class="fig"><div class="fig-title">风控建模链路与监控</div>
 <svg viewBox="0 0 700 250" width="100%" xmlns="http://www.w3.org/2000/svg"
 style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="8" y="20" width="152" height="4" rx="2" fill="#6B7280"/><text x="84" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">数据与标签</text><text x="84" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">申请 / 行为 / 征信</text><path d="M162 52 L176 52" stroke="#6B7280" stroke-width="1.4" opacity=".5"/><rect x="176" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="176" y="20" width="152" height="4" rx="2" fill="#0E7C86"/><text x="252" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">特征工程</text><text x="252" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">分箱 / WOE / IV</text><path d="M330 52 L344 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="344" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="344" y="20" width="152" height="4" rx="2" fill="#0E7C86"/><text x="420" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">模型</text><text x="420" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">评分卡 + GBDT</text><path d="M498 52 L512 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="512" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="512" y="20" width="152" height="4" rx="2" fill="#12324E"/><text x="588" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">评估</text><text x="588" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">KS / AUC / PSI</text><rect x="8" y="108" width="684" height="58" rx="9" fill="#F2EFE7"/><text x="22" y="130" font-size="10.5" font-weight="700" fill="#12324E">评分卡：分箱 → WOE 编码 → 逻辑回归 → 分数映射（A - B·ln(odds)）</text><text x="22" y="150" font-size="9.5" fill="#6B7280">可解释性是硬要求：每个拒绝理由都要能落到具体变量与分箱。</text><text x="8" y="192" font-size="10" fill="#6B7280">监控：PSI 看分布漂移，KS 看区分度衰减，坏账率看实际表现——三者一起判模型是否该迭代。</text><text x="8" y="212" font-size="10" fill="#6B7280">复现范围：信用评分卡、消费金融风控、企业经营风险预测、模型部署方式。</text></svg></div></div>
+    <div class="blk iter"><h4>过程中的思考与改进</h4><ul><li><b>分箱要加单调性约束</b>：纯卡方分箱追求区分度，会分出“收入越高风险越高”这种业务上根本讲不通的箱。加单调性约束后区分度略降，但每个箱都能对客户解释得通。</li><li><b>只有放款样本有表现</b>：直接拿通过样本训练会带来样本偏差，必须用拒绝推断修正，否则模型学的是“过去的审批偏好”。</li><li><b>监控阈值要提前定</b>：PSI 超过 0.1 触发排查、KS 衰减超过阈值触发重训——事后才补阈值，等于上线时就没有监控。</li></ul></div>
   </div>
 </div>
 </div></section>
@@ -853,7 +929,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8"
       <ul><li>有真实用户、真实数据、上线记录</li><li>能讲清需求来源、决策过程与结果</li><li>涉及未公开数据与内部系统的部分已做脱敏</li></ul></div>
     <div class="map-col"><div class="t">自研</div><div class="n">独立设计与实现的系统</div>
       <ul><li>代码、架构、评测均由本人完成</li><li>可现场演示与讲解实现细节</li><li>EchoMind 为完整自研项目</li></ul></div>
-    <div class="map-col"><div class="t">课程实战复现</div><div class="n">在公开课程 / 开源基线上的实现</div>
+    <div class="map-col"><div class="t">基于开源的二次开发</div><div class="n">在开源 / 公开课程基线上的二次开发</div>
       <ul><li>如实标注基线来源，不冒充原创</li><li>重点呈现工程理解、改造点与可迁移能力</li><li>面试时可展开讲“我改了什么、为什么”</li></ul></div>
   </div>
 </div></section>
@@ -868,7 +944,7 @@ style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8"
   <div>
     <h5>说明</h5>
     <p>本作品集用于求职展示。涉及原单位的项目已做脱敏处理，不包含未公开的采购数据、客户信息与内部系统细节。</p>
-    <div class="note">标注“课程实战复现”的项目基于公开课程或开源项目，个人贡献在于实现、改造与工程化验证。<br>
+    <div class="note">标注“基于开源的二次开发”的项目以公开课程或开源项目为基线，个人贡献在于二次开发、场景化改造与工程化验证。<br>
     版本：2026.11</div>
   </div>
   <div class="foot-end">以上，是过去七年里，十个可以拿出来聊的切片。</div>
