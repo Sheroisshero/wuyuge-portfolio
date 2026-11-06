@@ -2,12 +2,38 @@
 
 > 把复杂业务，拆成可运行的算法系统。
 
-大模型算法 / 多智能体工程 / 数据与知识系统。五类、十个项目，每个项目按「背景 — 介绍 — 亮点 — 原理与架构 — 可视化 — 可公开的技术细节」展开。
+大模型算法 / 多智能体工程 / 数据与知识系统。**一条 AI 价值链路，十个项目**——首页用一张图讲清项目之间的强项、意义、联系与技术栈。
 
-- 网页版（GitHub Pages）：`index.html`
+- 网页版（GitHub Pages）：<https://sheroisshero.github.io/wuyuge-portfolio/>
 - PDF 版：`吴宇歌_个人作品集_2026.pdf`（A4，14 页）
 
-## 内容结构
+## 首页：AI 价值全链路
+
+首页把十个项目放进同一条从「业务问题」到「指标闭环」的链路里，每个节点都标出我在其中承担的角色、用到的技术栈和已经拿到的结果：
+
+| 阶段 | 解决的问题 | 项目 | 技术栈 |
+| --- | --- | --- | --- |
+| 01 问题定义 | 模糊诉求 → 可解问题 | 04 EchoMind 运行时 / 05 问对·访谈辅导 | 意图路由 · 分层记忆 · 工具层 · 议题树 · 流式 ASR |
+| 02 模型训练 | 训练 · 对齐 · 压缩 | 01 异常行为识别 / 02 大模型全链路 | YOLOv8 · SlowFast · INT8 · LoRA · DPO · KV Cache |
+| 03 系统工程 | 把模型装进能跑的平台 | 03 彩翼 · 智能体平台 | 五层架构 · L1–L4 路由 |
+| 04 评测治理 | 结果可量化 · 数据可检索 | 07 政务数据治理 / 08 NUS 文本编码 | 76.3 万公告 · 六阶段 · κ 0.86 · 47,950 条 |
+| 05 FDE 交付 | 原型 → 客户生产环境 | 06 知栈 · 知识库 | pgvector · SSE · 成本权衡 |
+| 06 行业落地 | 在金融场景跑通闭环 | 09 AI 量化交易 / 10 金融风控模型 | 因子 · 回测 · 风控 · 评分卡 · GBDT · PSI |
+
+节点用三种颜色区分项目性质：**实战交付**（青）、**自研**（琥珀）、**课程实战复现**（深蓝）；底部一条「能力传承」说明各项目之间怎么复用：彩翼架构 → EchoMind｜FDE 交付 → 知栈｜多模态压缩 → 微调蒸馏｜数据治理 → 风控特征。
+
+## 每页的统一结构
+
+十个项目都按同一套顺序展开，其中「我的角色与核心贡献」单独成块，用「定路线 / 攻难点 / 推落地」这类动作词写清楚我做了什么、结果是什么：
+
+1. 项目背景与业务意义
+2. **我的角色与核心贡献**
+3. 项目亮点与业务影响
+4. 基础原理与架构
+5. 可视化图表
+6. 可公开的技术细节
+
+## 十个项目
 
 | 类别 | 项目 | 性质 |
 | --- | --- | --- |
@@ -34,8 +60,10 @@
 00_作品集/
 ├── index.html                      # 网页版（单文件，无外部依赖）
 ├── portfolio_pdf.html              # PDF 排版专用页
-├── 吴宇歌_个人作品集_2026.pdf        # PDF 成品
+├── 吴宇歌_个人作品集_2026.pdf        # PDF 成品（14 页）
 ├── build.py                        # 渲染器（网页版 / PDF 版共用一套数据）
+├── assets/
+│   └── portrait.jpg                # 个人照片（以 base64 内嵌进 HTML）
 ├── build_parts/
 │   ├── theme.py                    # 视觉系统 + 内联 SVG 图表组件
 │   ├── projects_1.py               # 项目 01–05 数据与图表
@@ -47,8 +75,8 @@
 ## 本地构建
 
 ```bash
-python build.py            # 生成 index.html
-python build.py --pdf      # 生成 portfolio_pdf.html
+python build.py                   # 生成 index.html
+python build.py --pdf             # 生成 portfolio_pdf.html
 python build_parts/build_all.py   # 全量：网页版 + PDF + 逐页预览
 ```
 
@@ -57,7 +85,8 @@ PDF 由 Chrome headless 打印 `portfolio_pdf.html` 得到，需带独立 `--use
 ## 技术说明
 
 - 纯 Python 生成静态 HTML，无外部依赖、无 CDN，离线可看，GitHub Pages 直接托管。
-- 所有图表为内联 SVG（`viewBox` 自适应），文字可选中、可打印，不依赖图片资源。
+- 首页链路图、项目图表全部为内联 SVG（`viewBox` 自适应），文字可选中、可打印；首页节点带级联淡入动画，打印时自动关闭。
+- 照片转为 base64 data-URI 内嵌，单文件即可完整呈现，PDF 打印不丢图。
 - 视觉系统：墨黑 `#101827` / 深海军蓝 `#12324E` / 青 `#0E7C86` / 琥珀 `#D98A1F` / 米白纸底 `#FBFAF7`。
 
 ## 相关仓库
@@ -66,15 +95,8 @@ PDF 由 Chrome headless 打印 `portfolio_pdf.html` 得到，需带独立 `--use
 - [Caiyi-Agent-Platform](https://github.com/Sheroisshero/Caiyi-Agent-Platform) — 项目 03
 - [resume-wuyuge](https://github.com/Sheroisshero/resume-wuyuge) — 个人简历
 - [ai-assisted-content-analysis](https://github.com/Sheroisshero/ai-assisted-content-analysis) — 文本编码与分析
+- `projects/` — 04 EchoMind、05 问对、06 知栈 三个无独立仓库项目的说明文档
 
 ---
 
 吴宇歌 · 新加坡国立大学 科学人工智能硕士 · github.com/Sheroisshero
-
-## 项目说明文档
-
-三个未单独建库的项目，说明文档归档在本仓库 `projects/` 下：
-
-- [EchoMind · 多 Agent 客服运行时](projects/echomind-agent-runtime/README.md)
-- [问对 · 访谈实时辅导](projects/wendui-interview-coach/README.md)
-- [知栈 · 企业知识库问答](projects/zhizhan-rag-knowledge-base/README.md)
