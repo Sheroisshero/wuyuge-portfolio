@@ -70,3 +70,11 @@ PDF 由 Chrome headless 打印 `portfolio_pdf.html` 得到，需带独立 `--use
 ---
 
 吴宇歌 · 新加坡国立大学 科学人工智能硕士 · github.com/Sheroisshero
+
+## 项目说明文档
+
+三个未单独建库的项目，说明文档归档在本仓库 `projects/` 下：
+
+- [EchoMind · 多 Agent 客服运行时](projects/echomind-agent-runtime/README.md)
+- [问对 · 访谈实时辅导](projects/wendui-interview-coach/README.md)
+- [知栈 · 企业知识库问答](projects/zhizhan-rag-knowledge-base/README.md)
