@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>吴宇歌 · AI 算法作品集 2026</title>
+<meta name="description" content="吴宇歌的 AI 算法作品集：多模态识别、大模型微调、多智能体平台、RAG、数据治理、量化与风控。">
+<style>
+:root{
+  --ink:#101827; --navy:#12324E; --teal:#0E7C86; --amber:#D98A1F;
+  --paper:#FBFAF7; --white:#FFFFFF; --line:#E6E2D8; --muted:#6B7280; --soft:#F2EFE7;
+  --ink-60:rgba(16,24,39,.62); --ink-40:rgba(16,24,39,.4);
+  --shadow:0 1px 2px rgba(16,24,39,.04), 0 8px 28px rgba(16,24,39,.06);
+  --radius:18px;
+  --sans:"Inter","SF Pro Text",-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --mono:"SF Mono","JetBrains Mono",Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15.5px;line-height:1.75;letter-spacing:.01em;-webkit-font-smoothing:antialiased;}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.86);
+  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1120px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;gap:18px}
+.brand{font-weight:700;font-size:14px;letter-spacing:.14em;color:var(--navy)}
+.brand span{color:var(--teal)}
+.nav{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
+.nav a{font-size:12.5px;color:var(--ink-60);letter-spacing:.06em;padding:4px 0;border-bottom:1px solid transparent;transition:.2s}
+.nav a:hover{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* ---------- hero ---------- */
+.hero{padding:88px 0 64px;background:
+  radial-gradient(1200px 520px at 82% -8%, rgba(14,124,134,.10), transparent 62%),
+  radial-gradient(900px 460px at 8% 0%, rgba(217,138,31,.09), transparent 60%),
+  var(--paper);
+  border-bottom:1px solid var(--line)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--teal);font-weight:600}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--teal);display:block}
+h1{font-size:clamp(38px,5.4vw,62px);line-height:1.12;letter-spacing:-.02em;font-weight:800;margin:22px 0 0}
+h1 em{font-style:normal;color:var(--teal)}
+.lede{margin-top:22px;max-width:680px;font-size:17px;color:var(--ink-60);line-height:1.85}
+.lede b{color:var(--ink);font-weight:650}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tag{font-size:12px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;
+  color:var(--ink-60);background:var(--white)}
+.tag.hot{border-color:rgba(14,124,134,.35);color:var(--teal);background:rgba(14,124,134,.06)}
+
+/* ---------- stat strip ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:46px}
+.stat{background:var(--white);padding:22px 20px}
+.stat .n{font-size:30px;font-weight:750;letter-spacing:-.02em;line-height:1.1}
+.stat .n small{font-size:14px;font-weight:600;color:var(--teal);margin-left:2px}
+.stat .k{font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.04em}
+
+/* ---------- section ---------- */
+section{padding:74px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:flex;align-items:flex-end;gap:18px;margin-bottom:10px;flex-wrap:wrap}
+.sec-no{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.12em;padding-bottom:6px}
+h2{font-size:clamp(26px,3.2vw,34px);letter-spacing:-.015em;font-weight:750;line-height:1.25}
+.sec-sub{color:var(--ink-60);max-width:760px;margin-top:14px;font-size:15px}
+
+/* ---------- project card ---------- */
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin-top:34px;overflow:hidden}
+.card-top{padding:30px 34px 0}
+.card-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+.repo{margin-left:auto;font-size:11.5px;color:var(--teal);text-decoration:none;font-weight:600;
+  border-bottom:1px solid rgba(14,124,134,.35);padding-bottom:1px}
+.repo:hover{color:var(--navy);border-color:var(--navy)}
+.badge{font-size:11px;padding:4px 10px;border-radius:6px;font-weight:600;letter-spacing:.06em}
+.badge.live{background:rgba(14,124,134,.10);color:var(--teal)}
+.badge.self{background:rgba(217,138,31,.12);color:#8A5A10}
+.badge.repro{background:rgba(18,50,78,.08);color:var(--navy)}
+.card h3{font-size:24px;font-weight:730;letter-spacing:-.01em;margin:12px 0 0;line-height:1.3}
+.card .sub{font-size:14px;color:var(--ink-60);margin-top:8px}
+.card-body{padding:22px 34px 34px}
+.grid2{display:grid;grid-template-columns:1.06fr .94fr;gap:28px;align-items:start}
+.blk{margin-top:22px}
+.blk h4{font-size:12px;letter-spacing:.14em;color:var(--teal);font-weight:700;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.blk h4::after{content:"";height:1px;flex:1;background:var(--line)}
+.blk p{font-size:14.6px;color:#26303F;line-height:1.9}
+.blk ul{list-style:none;margin-top:2px}
+.blk li{position:relative;padding-left:18px;font-size:14.4px;line-height:1.85;color:#26303F;margin-bottom:8px}
+.blk li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;
+  background:var(--teal);opacity:.55;transform:rotate(45deg)}
+.kv{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.kv span{font-family:var(--mono);font-size:11.5px;padding:4px 9px;background:var(--soft);
+  border-radius:5px;color:var(--navy)}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
+body.pdf .tech-grid{gap:0 20px}
+
+/* figure */
+.fig{background:linear-gradient(180deg,#fff, #FBFAF7);border:1px solid var(--line);
+  border-radius:14px;padding:18px 16px 12px;margin-top:6px}
+.fig .cap{font-size:11.5px;color:var(--muted);margin-top:8px;letter-spacing:.03em;text-align:center}
+.fig-title{font-size:11px;letter-spacing:.12em;color:var(--ink-40);font-weight:600;margin-bottom:10px}
+
+/* ---------- index / map ---------- */
+.map{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:30px}
+.map-col{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px 16px}
+.map-col .t{font-size:11px;letter-spacing:.14em;color:var(--amber);font-weight:700}
+.map-col .n{font-size:15px;font-weight:700;margin-top:6px}
+.map-col ul{list-style:none;margin-top:10px}
+.map-col li{font-size:12.5px;color:var(--ink-60);line-height:1.7;margin-bottom:6px}
+.map-col a:hover{color:var(--teal)}
+
+/* ---------- footer ---------- */
+footer{padding:60px 0 80px;background:var(--ink);color:#EAE6DC}
+body.pdf footer{padding:58px 0 36px;margin-top:26px;min-height:640px;display:flex;flex-direction:column}
+body.pdf footer .wrap{flex:1;display:flex;flex-direction:column}
+.foot-end{margin-top:auto;padding-top:36px;border-top:1px solid rgba(234,230,220,.16);
+  font-size:12px;letter-spacing:.14em;color:rgba(234,230,220,.52)}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+footer h5{font-size:11px;letter-spacing:.16em;color:rgba(234,230,220,.55);font-weight:600;margin-bottom:12px}
+footer p{font-size:14px;line-height:1.9;color:rgba(234,230,220,.8)}
+footer .mail{font-family:var(--mono);font-size:13px;color:#7FCBD1;margin-top:10px}
+.note{font-size:11.5px;line-height:1.8;color:rgba(234,230,220,.5);margin-top:18px}
+
+@media (max-width:900px){
+  .grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .map{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  .hero{padding:64px 0 48px}
+  .card-top,.card-body{padding-left:22px;padding-right:22px}
+  footer .wrap{grid-template-columns:1fr}
+}
+@page{size:A4;margin:14mm 12mm}
+@media print{
+  .top{display:none}
+  body{background:#fff;font-size:13.5px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:100%;padding:0 2px}
+  section{padding:14px 0;break-inside:auto}
+  .card{box-shadow:none;border:1px solid #E2DED4;break-inside:auto;margin-top:12px}
+  .blk,.fig,.stat,.map-col{break-inside:avoid}
+  .card-top{break-after:avoid}
+  .hero{padding:0 0 10px}
+  h1{font-size:25pt}
+  h2{font-size:17pt}
+  .lede{font-size:11.5pt}
+  .stats{margin-top:18px}
+  .stat .n{font-size:20pt}
+  a{color:inherit}
+}
+/* ---------- pdf booklet ---------- */
+body.pdf{margin:0}
+body.pdf .top{display:none}
+body.pdf .wrap{max-width:700px;padding:0 6px}
+body.pdf .hero{padding:0 0 12px;border-bottom:1px solid var(--line);break-before:page}
+body.pdf h1{font-size:30px}
+body.pdf .stats{grid-template-columns:repeat(4,1fr);margin-top:22px}
+body.pdf .map{grid-template-columns:repeat(5,1fr);gap:8px;margin-top:16px}
+body.pdf .map-col{padding:11px 10px}
+body.pdf .map-col .t{font-size:9px}
+body.pdf .map-col .n{font-size:11px;margin-top:3px}
+body.pdf .map-col li{font-size:9.5px;line-height:1.55;margin-bottom:3px}
+body.pdf #map .sec-head,body.pdf #map .sec-sub{display:none}
+body.pdf #map{padding-top:10px}
+body.pdf .stat{padding:14px 12px}
+body.pdf .stat .n{font-size:22px}
+body.pdf .stat .k{font-size:10px}
+body.pdf .card{break-inside:auto;break-before:page}
+body.pdf .card.first{break-before:auto}
+body.pdf .group{break-before:auto}
+body.pdf .sec-head{break-before:page}
+body.pdf section{break-before:auto}
+body.pdf #map{break-before:auto}
+body.pdf .grid2{grid-template-columns:1fr 1fr;gap:18px}
+body.pdf .card-top{padding:18px 22px 0}
+body.pdf .card-body{padding:12px 22px 18px}
+body.pdf h3{font-size:18px}
+body.pdf .card .sub{font-size:12px;margin-top:5px}
+body.pdf .blk{margin-top:11px}
+body.pdf .blk h4{font-size:10px;margin-bottom:6px}
+body.pdf .blk p{font-size:11.5px;line-height:1.66}
+body.pdf .blk li{font-size:11.1px;line-height:1.6;margin-bottom:4px;padding-left:14px}
+body.pdf .blk li::before{width:5px;height:5px}
+body.pdf .fig{padding:8px 7px 5px;max-width:560px;margin-left:auto;margin-right:auto}
+body.pdf .fig svg{max-height:205px;width:auto;margin:0 auto}
+body.pdf .fig .cap,body.pdf .fig-title{font-size:8.5px}
+body.pdf .sec-head{margin-bottom:4px}
+body.pdf h2{font-size:19px}
+body.pdf .sec-sub{font-size:12px;margin-top:9px}
+body.pdf .card-meta{font-size:10px}
+body.pdf .badge{font-size:9.5px}
+.cover{height:262mm;background:var(--navy);color:#F2EFE7;padding:30mm 18mm 22mm;display:flex;
+  flex-direction:column;justify-content:space-between;break-after:page;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;right:-70mm;top:-40mm;width:180mm;height:180mm;border-radius:50%;
+  background:radial-gradient(circle,rgba(14,124,134,.42),transparent 66%)}
+.cover .kicker{font-size:10px;letter-spacing:.34em;color:#8FD2D6}
+.cover h1{color:#fff;font-size:38px;line-height:1.28;margin:26px 0 0;letter-spacing:.01em}
+.cover h1 em{color:#8FD2D6;font-style:normal}
+.cover .who{font-size:15px;color:#D9D4C8;margin-top:18px;letter-spacing:.06em}
+.cover .meta{font-size:10.5px;color:rgba(242,239,231,.62);letter-spacing:.1em;line-height:2}
+.cover .line{width:52px;height:3px;background:var(--amber);margin:26px 0 0}
+.cover-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 26px;margin-top:34mm;position:relative;z-index:2}
+.cover-list .it{display:flex;gap:9px;font-size:10px;color:rgba(242,239,231,.72);letter-spacing:.04em}
+.cover-list .it b{font-family:var(--mono);font-weight:600;color:#8FD2D6;font-size:9px}
+.abilities{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.ab{border:1px solid var(--line);border-radius:10px;padding:12px 13px;background:rgba(255,255,255,.56)}
+.ab b{display:block;font-size:10.5px;color:var(--teal);letter-spacing:.08em;margin-bottom:5px;font-weight:700}
+.ab p{font-size:10px;color:var(--muted);line-height:1.7}
+.toc{padding-top:6mm}
+.toc h2{font-size:22px;margin-bottom:6px}
+.toc .hint{font-size:11px;color:var(--muted);margin-bottom:16px}
+.toc-row{display:flex;align-items:baseline;gap:8px;padding:7px 0;border-bottom:1px dashed #E2DED4}
+.toc-row .no{font-family:var(--mono);font-size:10.5px;color:var(--amber);width:22px}
+.toc-row .t{font-size:12.5px;font-weight:600}
+.toc-row .c{margin-left:auto;font-size:10px;color:var(--muted)}
+.toc-cat{font-size:10px;letter-spacing:.18em;color:var(--teal);font-weight:700;margin:16px 0 4px}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22mm;padding-top:10px;border-top:1px solid var(--line)}
+.legend .lg{font-size:9.5px;color:var(--muted);line-height:1.7}
+.legend .lg b{display:block;font-size:10.5px;color:var(--ink);margin-bottom:3px;font-weight:700}
+.tl{margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+.tl-item{display:grid;grid-template-columns:88px 1fr 1.25fr;gap:12px;padding:8px 0;border-bottom:1px dashed #E2DED4;align-items:baseline}
+.tl-t{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.02em}
+.tl-n{font-size:11px;font-weight:700;color:var(--ink)}
+.tl-d{font-size:10px;color:var(--muted);line-height:1.6}
+</style>
+</head><body>
+<div class="top"><div class="top-in">
+  <div class="brand">吴宇歌<span>.</span>PORTFOLIO</div>
+  <div class="nav"><a href="#cat1">算法类</a><a href="#cat2">开发类</a><a href="#cat3">产品类</a><a href="#cat4">数据类</a><a href="#cat5">行业类</a><a href="#note">说明</a></div>
+</div></div>
+
+
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Portfolio 2026 · AI Algorithm &amp; Engineering</div>
+  <h1>把复杂业务，<em>拆成可运行的算法系统</em></h1>
+  <p class="lede">我是吴宇歌，新加坡国立大学科学人工智能硕士在读。过去 7 年，我在广州市政府采购中心做过平台架构与项目负责人，也在一线写代码；现在在 Google gTech Ads 与 Shopee 做前沿部署与算法实习。这份作品集收录 5 类 10 个项目，每一个都尽量说清：<b>为什么做、怎么做、结果如何、哪些技术可以公开讲</b>。</p>
+  <div class="hero-tags"><span class="tag hot">多模态识别</span><span class="tag hot">大模型微调</span><span class="tag hot">多智能体编排</span><span class="tag">RAG</span><span class="tag">数据治理</span><span class="tag">量化与风控</span></div>
+  <div class="stats"><div class="stat"><div class="n">13<small>个</small></div><div class="k">智能体协同上线</div></div><div class="stat"><div class="n">98.5<small>%</small></div><div class="k">合规审查精确率</div></div><div class="stat"><div class="n">76.3<small>万</small></div><div class="k">条公告完成治理</div></div><div class="stat"><div class="n">165<small>章</small></div><div class="k">大模型技术体系</div></div></div>
+</div></div>
+
+<section id="map"><div class="wrap">
+  <div class="sec-head"><div class="sec-no">INDEX</div><h2>作品集地图</h2></div>
+  <p class="sec-sub">按能力域分成五类。前两类看“怎么把算法跑成系统”，中间两类看“怎么让技术可用”，最后一类看“在行业里能不能落地”。</p>
+  <div class="map"><div class="map-col"><div class="t">算法类</div><div class="n">2 个项目</div><ul><li><a href="#p01">01 · AI 远程异地评审专家异常行为识别</a></li><li><a href="#p02">02 · 大模型全链路工程手册</a></li></ul></div><div class="map-col"><div class="t">开发类</div><div class="n">2 个项目</div><ul><li><a href="#p03">03 · 彩翼</a></li><li><a href="#p04">04 · EchoMind</a></li></ul></div><div class="map-col"><div class="t">产品类</div><div class="n">2 个项目</div><ul><li><a href="#p05">05 · 问对</a></li><li><a href="#p06">06 · 知栈</a></li></ul></div><div class="map-col"><div class="t">数据类</div><div class="n">2 个项目</div><ul><li><a href="#p07">07 · 政务采购数据治理</a></li><li><a href="#p08">08 · 47,950 条文本的 LLM 辅助编码</a></li></ul></div><div class="map-col"><div class="t">行业类</div><div class="n">2 个项目</div><ul><li><a href="#p09">09 · AI 量化交易系统</a></li><li><a href="#p10">10 · 金融风控算法模型</a></li></ul></div></div>
+</div></section>
+
+<section id="cat1"><div class="wrap">
+  <div class="group">
+  <div class="sec-head"><div class="sec-no">01 / 算法类</div><h2>算法类</h2></div>
+  <p class="sec-sub">从多模态异常识别到大模型全链路：既做模型，也管数据、训练、推理与评测。</p>
+  
+<div class="card first" id="p01">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge live">实战交付</span>
+      <span>01</span><span>·</span><span>算法类</span><span>·</span><span>广州市政府采购中心 · 项目负责人 / 组长 · 2025.03 – 2026.07</span><a class="repo" href="https://github.com/Sheroisshero/bid-evaluation-behavior-recognition" target="_blank" rel="noopener">查看代码 ↗</a></div>
+    <h3>AI 远程异地评审专家异常行为识别</h3>
+    <p class="sub">把“看不见的评审现场”变成可预警、可追溯的结构化报告</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>远程异地评标是政府采购的改革方向：专家分散在不同地点、通过音视频系统评审。监管的难点从“现场盯着”变成了“屏幕上找”——操作手机、交头接耳、擅自离席、不当言论这些行为，靠人工盯屏既看不全、也留不下证据。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>一套视觉 + 音频 + 文本三路融合的异常行为识别系统，部署在评审现场边缘设备上，把异常行为从“发现”到“预警”再到“成文”全链路自动化，最终输出可追溯的《疑似异常行为分析报告》。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>不平衡学习：过采样 + Focal Loss，按类别调阈值而不是统一 0.5</li><li>时序行为窗口：16 帧滑窗 + 重叠采样，解决“动作跨秒”问题</li><li>ASR 敏感词：同音字、变体写法、上下文否定一起判</li><li>模型压缩：INT8 量化 → 结构化剪枝 → 蒸馏三步，精度回补靠小学习率微调</li><li>数据与合规：3000 小时标注视频，涉敏画面脱敏后入库</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>极端不平衡下可用</b>：异常样本仅占 5%，通过重采样与损失设计把异常识别 Recall 做到 85.1%、精确率 76.3%。</li><li><b>能上边缘设备</b>：YOLOv8 经 INT8 量化 + 剪枝 + 蒸馏从 6.2M 压到 2.1M，延迟降 40%，30 台设备 15 FPS 稳定运行。</li><li><b>不止于报警</b>：采集→识别→预警→剪辑→报告全自动，异常片段自动截取并绑定事件，业务效率提升 200%。</li><li><b>成果沉淀</b>：实用新型专利 2 项、发明专利 1 项，已在广州公共资源交易中心落地。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 470 160" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0" y="19.84" font-size="11.5" fill="#6B7280">异常识别 Recall</text><rect x="124" y="4" width="274" height="22" rx="4" fill="#F2EFE7"/><rect x="124" y="4" width="239.1" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="372.1" y="19.84" font-size="11" font-weight="700" fill="#101827">85.1%</text><text x="0" y="57.84" font-size="11.5" fill="#6B7280">异常识别精确率</text><rect x="124" y="42" width="274" height="22" rx="4" fill="#F2EFE7"/><rect x="124" y="42" width="214.4" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="347.4" y="57.84" font-size="11" font-weight="700" fill="#101827">76.3%</text><text x="0" y="95.84" font-size="11.5" fill="#6B7280">文本抽取准确率</text><rect x="124" y="80" width="274" height="22" rx="4" fill="#F2EFE7"/><rect x="124" y="80" width="258.5" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="391.5" y="95.84" font-size="11" font-weight="700" fill="#101827">92%</text><text x="0" y="133.84" font-size="11.5" fill="#6B7280">检测 mAP@0.5</text><rect x="124" y="118" width="274" height="22" rx="4" fill="#F2EFE7"/><rect x="124" y="118" width="199.5" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="332.5" y="133.84" font-size="11" font-weight="700" fill="#101827">71%</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>视觉路用 YOLOv8 做人脸 / 姿态 / 手机检测，SlowFast 做时序行为识别；音频路用 Whisper/FunASR 实时转写并匹配违禁词；文本路做语义与规则双判。三路结果按时间戳对齐、置信度加权后融合成事件，再触发预警、切片和报告生成。</p><div class="fig"><div class="fig-title">三路信号 → 融合评分 → 预警 / 片段 / 报告</div>
+<svg viewBox="0 0 700 300" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="18" y="8" width="196" height="52" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="116" y="30" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">视频流</text><text x="116" y="46" font-size="9.5" fill="#6B7280" text-anchor="middle">摄像头 15 FPS</text><path d="M116 62 L116 84" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="245" y="8" width="196" height="52" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="343" y="30" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">音频流</text><text x="343" y="46" font-size="9.5" fill="#6B7280" text-anchor="middle">麦克风 / 转写</text><path d="M343 62 L343 84" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="472" y="8" width="196" height="52" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="570" y="30" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">操作日志</text><text x="570" y="46" font-size="9.5" fill="#6B7280" text-anchor="middle">系统事件</text><path d="M570 62 L570 84" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="18" y="86" width="196" height="58" rx="9" fill="#F2EFE7" stroke="#E6E2D8"/><text x="116" y="110" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">YOLOv8 目标检测</text><text x="116" y="128" font-size="9.5" fill="#6B7280" text-anchor="middle">人脸 / 姿态 / 手机</text><path d="M116 146 L116 166" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="245" y="86" width="196" height="58" rx="9" fill="#F2EFE7" stroke="#E6E2D8"/><text x="343" y="110" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">SlowFast 时序行为</text><text x="343" y="128" font-size="9.5" fill="#6B7280" text-anchor="middle">交头接耳 / 离席</text><path d="M343 146 L343 166" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="472" y="86" width="196" height="58" rx="9" fill="#F2EFE7" stroke="#E6E2D8"/><text x="570" y="110" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">ASR + 敏感词</text><text x="570" y="128" font-size="9.5" fill="#6B7280" text-anchor="middle">Whisper / FunASR</text><path d="M570 146 L570 166" stroke="#0E7C86" stroke-width="1.4" opacity=".6"/><rect x="150" y="168" width="400" height="56" rx="11" fill="#0E7C86" opacity=".10"/><rect x="150" y="168" width="400" height="56" rx="11" fill="none" stroke="#0E7C86" opacity=".35"/><text x="350" y="192" font-size="12.5" font-weight="700" fill="#0E7C86" text-anchor="middle">多模态融合与事件化评分</text><text x="350" y="210" font-size="9.5" fill="#6B7280" text-anchor="middle">时间戳对齐 · 置信度加权 · 去重归并</text><path d="M350 224 L134 252" stroke="#0E7C86" stroke-width="1.2" opacity=".45"/><rect x="40" y="254" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="134" y="271" font-size="10.5" font-weight="700" fill="#101827" text-anchor="middle">实时预警</text><text x="134" y="285" font-size="9" fill="#6B7280" text-anchor="middle">弹窗 / 声光</text><path d="M350 224 L362 252" stroke="#0E7C86" stroke-width="1.2" opacity=".45"/><rect x="268" y="254" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="362" y="271" font-size="10.5" font-weight="700" fill="#101827" text-anchor="middle">事件片段</text><text x="362" y="285" font-size="9" fill="#6B7280" text-anchor="middle">自动剪辑</text><path d="M350 224 L590 252" stroke="#0E7C86" stroke-width="1.2" opacity=".45"/><rect x="496" y="254" width="188" height="40" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="590" y="271" font-size="10.5" font-weight="700" fill="#101827" text-anchor="middle">分析报告</text><text x="590" y="285" font-size="9" fill="#6B7280" text-anchor="middle">结构化模板</text></svg></div></div>
+  </div>
+</div>
+</div>
+  
+<div class="card" id="p02">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge repro">课程实战复现</span>
+      <span>02</span><span>·</span><span>算法类</span><span>·</span><span>个人项目 · 165 章技术体系 + 实验复现 · 2024 – 2026</span></div>
+    <h3>大模型全链路工程手册</h3>
+    <p class="sub">从数据配比到 KV Cache：把训练、微调、对齐、推理、评测串成一条能复现的链路</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>大模型落地最常断在两个地方：会用 API 但不懂训练，看得懂论文但跑不动实验。数据怎么配、LoRA 怎么设、DPO 为什么比 RLHF 省、KV Cache 到底吃多少显存——这些问题不打通，工程上就只能猜。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>把大模型的全链路拆成 5 个系列、165 章：推理优化（量化 / KV Cache / 投机采样）、训练数据工程、LoRA/QLoRA 微调、DPO 偏好优化、SFT 数据配比与课程学习。每章都配参数选择与实验设计，并以课程实验（QLoRA 微调 ChatGLM3-6B、PEFT、量化、DeepSpeed、MoE）做复现验证。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>LoRA / QLoRA：rank / alpha / target_modules 的取舍；4bit NF4 + 双重量化 + paged optimizer，单卡跑 6B</li><li>SFT 数据配比：按难度分层做课程学习，先易后难 + 回放防遗忘</li><li>DPO：β 与参考模型的关系，偏好对构造比超参更影响结果</li><li>KV Cache / 投机采样：显存 ≈ 2 × layers × heads × head_dim × seq_len × batch × dtype；接受率决定加速比</li><li>评测：golden set + LLM-as-Judge + 人工抽检三层，避免单一指标失真</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>成体系</b>：5 个系列 165 章，覆盖预训练数据 → SFT → 对齐 → 推理 → 评测，不是碎片笔记。</li><li><b>可复现</b>：QLoRA 微调、Transformers 量化、DeepSpeed、MoE 逐项跑通，记录显存、吞吐、精度变化。</li><li><b>带判断</b>：同一问题给出选型依据——什么时候用 LoRA、什么时候必须全参、DPO 与 RLHF 的取舍边界。</li></ul></div>
+        
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>链路是：数据工程 → SFT（LoRA/QLoRA）→ 偏好对齐（DPO/RLHF）→ 推理优化（量化 / KV Cache / 投机采样）→ 评测闭环。每个环节的输出都是下一环节的输入，评测结果反哺数据配比，形成闭环。</p><div class="fig"><div class="fig-title">预训练 → SFT → 偏好对齐 → 推理 → 评测</div>
+<svg viewBox="0 0 720 250" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="10" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="10" y="20" width="132" height="4" rx="2" fill="#0E7C86"/><text x="76" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">数据工程</text><text x="76" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">清洗 / 标注 / 配比</text><path d="M144 52 L154 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><path d="M151 49 L155 52 L151 55" fill="none" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="150" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="150" y="20" width="132" height="4" rx="2" fill="#0E7C86"/><text x="216" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">SFT 微调</text><text x="216" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">LoRA / QLoRA</text><path d="M284 52 L294 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><path d="M291 49 L295 52 L291 55" fill="none" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="290" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="290" y="20" width="132" height="4" rx="2" fill="#D98A1F"/><text x="356" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">偏好对齐</text><text x="356" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">RLHF / DPO</text><path d="M424 52 L434 52" stroke="#D98A1F" stroke-width="1.4" opacity=".5"/><path d="M431 49 L435 52 L431 55" fill="none" stroke="#D98A1F" stroke-width="1.4" opacity=".5"/><rect x="430" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="430" y="20" width="132" height="4" rx="2" fill="#12324E"/><text x="496" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">推理优化</text><text x="496" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">量化 / KV Cache</text><path d="M564 52 L574 52" stroke="#12324E" stroke-width="1.4" opacity=".5"/><path d="M571 49 L575 52 L571 55" fill="none" stroke="#12324E" stroke-width="1.4" opacity=".5"/><rect x="570" y="20" width="132" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="570" y="20" width="132" height="4" rx="2" fill="#12324E"/><text x="636" y="48" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">评测闭环</text><text x="636" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">golden set</text><line x1="10" y1="108" x2="710" y2="108" stroke="#E6E2D8"/><text x="10" y="132" font-size="10" letter-spacing="1" fill="#6B7280">章节产出（共 165 章）</text><rect x="10" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="16" y="159" font-size="10" font-weight="700" fill="#12324E">推理优化 · 30</text><rect x="152" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="158" y="159" font-size="10" font-weight="700" fill="#12324E">数据工程 · 30</text><rect x="294" y="146" width="90.2" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="300" y="159" font-size="10" font-weight="700" fill="#12324E">LoRA/QLoRA · 41</text><rect x="436" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="442" y="159" font-size="10" font-weight="700" fill="#12324E">DPO · 30</text><rect x="578" y="146" width="66.0" height="18" rx="4" fill="#0E7C86" opacity=".16"/><text x="584" y="159" font-size="10" font-weight="700" fill="#12324E">SFT 配比 · 30</text><text x="10" y="196" font-size="10.5" fill="#6B7280">每个环节都落到“参数怎么选、实验怎么设计、指标怎么读”，而不是只讲概念。</text></svg></div></div>
+  </div>
+</div>
+</div></section>
+<section id="cat2"><div class="wrap">
+  <div class="group">
+  <div class="sec-head"><div class="sec-no">02 / 开发类</div><h2>开发类</h2></div>
+  <p class="sec-sub">平台架构与运行时：一个面向真实行业的智能体底座，一个可运营的多 Agent 系统。</p>
+  
+<div class="card first" id="p03">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge live">实战交付</span>
+      <span>03</span><span>·</span><span>开发类</span><span>·</span><span>广州市政府采购中心 · 平台架构师 / 首席创新官 · 2022.10 – 2026.07</span><a class="repo" href="https://github.com/Sheroisshero/Caiyi-Agent-Platform" target="_blank" rel="noopener">查看代码 ↗</a></div>
+    <h3>彩翼 · 公共采购智能体协同管理平台</h3>
+    <p class="sub">全国首个公共采购智能体平台：从 0 到 1 搭起“智能体 + 数据 + 算力”的协同底座</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>公共采购年规模超 40 万亿，其中政府采购 3.37 万亿，但数字化采购渗透率只有 11.5%。行业里 AI 工具是碎片化的：文件审查一个系统、质疑回复一个系统、比价又一个系统，数据不通、责任不清，合规场景下没人敢用。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>彩翼是面向监管、采购人、代理机构、供应商四类主体的公共采购智能体协同平台，2025 年 4 月上线。规划 27 个智能体、已上线 10 款，采用五层架构，把智能体准入、数据治理、算力调度和业务场景放进同一个底座。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>智能体路由：按意图置信度分 L1–L4 四级，低置信度升级到更强模型而不是直接答</li><li>RAG 混合检索：向量 + BM25 + 知识图谱 + 重排，按场景调权重</li><li>Function Call：schema 版本化管理，失败重试 + 参数校验 + 兜底话术</li><li>评测：2000 条标注集 + 多模型 A/B，改动必须跑回归</li><li>第三方智能体准入：资质 → 技术 → 合规 → 场景实测 → 试运行五级</li><li>安全：XSS 五层防御、输出内容审核、操作全链路留痕</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>合规审查从“靠人”到“可量化”</b>：RAG 混合检索把合规审查精确率从 28% 提升到 98.5%，Top-5 召回率 89%。</li><li><b>多智能体真跑起来</b>：13 个智能体协同，L1–L4 路由，Function Call 成功率 94%，日均调用万次级。</li><li><b>数据底座</b>：4 个渠道 6 个库，治理 76.3 万条公告、53.6 万份合同，支撑模型训练与检索。</li><li><b>能算账</b>：单次推理成本压到 10 元以内，依托国产算力；平台覆盖交易额 100 亿+。</li><li><b>成果</b>：软著 6 项、专利 6 项（实用新型 2 / 发明 4），2026 数据要素大赛全国三等奖。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 420 156" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><line x1="0" y1="128" x2="420" y2="128" stroke="#E6E2D8"/><rect x="70" y="100.1" width="78" height="27.9" rx="6" fill="#6B7280" opacity=".35"/><text x="109.0" y="92.1" font-size="11" font-weight="700" fill="#6B7280" text-anchor="middle">28%</text><text x="109.0" y="146" font-size="10.5" fill="#6B7280" text-anchor="middle">规则引擎</text><rect x="200" y="29.8" width="78" height="98.2" rx="6" fill="#0E7C86"/><text x="239.0" y="21.8" font-size="11" font-weight="700" fill="#0E7C86" text-anchor="middle">98.5%</text><text x="239.0" y="146" font-size="10.5" fill="#0E7C86" text-anchor="middle">RAG 混合检索</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>五层架构自下而上：数据基座层负责托管、治理与共享交换；模型基座层做多模型接入与异构算力调度；平台层提供任务编排、RAG 检索、规则推理、OCR；应用管理层管准入、权限、计费、日志；生态应用层承载自研与第三方智能体。</p><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 470 282" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0" y="6" width="470" height="46" rx="9" fill="#0E7C86" opacity=".10"/><rect x="0" y="6" width="4" height="46" rx="2" fill="#0E7C86"/><text x="16" y="33.0" font-size="12" font-weight="700" fill="#101827">生态应用层</text><text x="456" y="33.0" font-size="10" fill="#6B7280" text-anchor="end">自研智能体 · 第三方智能体 · 可信数据空间</text><rect x="0" y="60" width="470" height="46" rx="9" fill="#12324E" opacity=".10"/><rect x="0" y="60" width="4" height="46" rx="2" fill="#12324E"/><text x="16" y="87.0" font-size="12" font-weight="700" fill="#101827">应用管理层</text><text x="456" y="87.0" font-size="10" fill="#6B7280" text-anchor="end">智能体准入 · 权限 · 计费 · 日志 · 对账</text><rect x="0" y="114" width="470" height="46" rx="9" fill="#12324E" opacity=".10"/><rect x="0" y="114" width="4" height="46" rx="2" fill="#12324E"/><text x="16" y="141.0" font-size="12" font-weight="700" fill="#101827">平台层</text><text x="456" y="141.0" font-size="10" fill="#6B7280" text-anchor="end">任务编排 · RAG 检索 · 规则推理 · OCR · CoT</text><rect x="0" y="168" width="470" height="46" rx="9" fill="#D98A1F" opacity=".10"/><rect x="0" y="168" width="4" height="46" rx="2" fill="#D98A1F"/><text x="16" y="195.0" font-size="12" font-weight="700" fill="#101827">模型基座层</text><text x="456" y="195.0" font-size="10" fill="#6B7280" text-anchor="end">多模型接入 · 算力调度 · 视觉 / OCR 能力</text><rect x="0" y="222" width="470" height="46" rx="9" fill="#D98A1F" opacity=".10"/><rect x="0" y="222" width="4" height="46" rx="2" fill="#D98A1F"/><text x="16" y="249.0" font-size="12" font-weight="700" fill="#101827">数据基座层</text><text x="456" y="249.0" font-size="10" fill="#6B7280" text-anchor="end">数据托管 · 治理 · 共享交换 · 可视化</text></svg></div></div>
+  </div>
+</div>
+</div>
+  
+<div class="card" id="p04">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge self">自研</span>
+      <span>04</span><span>·</span><span>开发类</span><span>·</span><span>个人项目 · Python FastAPI + Java + React · 2026</span></div>
+    <h3>EchoMind · 多 Agent 客服运行时</h3>
+    <p class="sub">可观测、可评测、可降级：把“聊天壳”做成一套能运营的系统</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>大多数客服机器人是单轮问答壳：问价格能答，一问到跨业务的组合问题就答非所问。根因不是模型不行，而是意图、知识、工具、记忆、评测这五件事没有编排在一起，出了问题也没法定位。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>EchoMind 是一个多 Agent 客服运行时：先做细粒度意图识别，再按意图路由到不同 Agent，按需触发 RAG，读写分层记忆，动态注入业务 Skills，并在线上持续监控、评测、必要时降权。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>三路意图：规则兜底、向量召回相似问、LLM 判语义，三路投票 + 置信度校准</li><li>路由降权：某 Agent 近期失败率升高时自动降权，把流量切给备用 Agent</li><li>记忆写入策略：只写“可复用的事实”，避免把寒暄灌进长期记忆</li><li>Skills 热加载：业务规则不改代码，reload 即生效</li><li>工具层：TTL 缓存 + 熔断 + 结果重排，防止单工具拖垮整条链路</li><li>评测：意图 / 路由 / 答案可用 / 拒答得当四类指标分开看</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>意图先行</b>：规则 + 向量 + LLM 三路融合，输出 intent / intent_group / urgency / entities，而不是只给一个标签。</li><li><b>路由驱动</b>：General / Technical / Billing / Escalation 四类 Agent，按置信度与风险决定升级路径。</li><li><b>记忆分层</b>：Redis 存工作记忆，ChromaDB 存情景记忆与画像，避免长上下文硬塞。</li><li><b>可运营</b>：在线监控采集指标，异常时自动路由降权；LLM-as-Judge 做端到端评测。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 440 160" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0" y="19.84" font-size="11.5" fill="#6B7280">意图识别</text><rect x="96" y="4" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="4" width="247.5" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="352.5" y="19.84" font-size="11" font-weight="700" fill="#101827">91%</text><text x="0" y="57.84" font-size="11.5" fill="#6B7280">路由准确</text><rect x="96" y="42" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="42" width="239.4" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="344.4" y="57.84" font-size="11" font-weight="700" fill="#101827">88%</text><text x="0" y="95.84" font-size="11.5" fill="#6B7280">答案可用</text><rect x="96" y="80" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="80" width="228.5" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="333.5" y="95.84" font-size="11" font-weight="700" fill="#101827">84%</text><text x="0" y="133.84" font-size="11.5" fill="#6B7280">拒答得当</text><rect x="96" y="118" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="118" width="253.0" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="358.0" y="133.84" font-size="11" font-weight="700" fill="#101827">93%</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>请求进入后先读记忆，再做意图识别；按意图决定是否检索知识库，然后路由到对应 Agent；Skills 按意图注入，工具层带缓存、熔断、重排；回复生成后写回记忆，同时进监控与评测。</p><div class="fig"><div class="fig-title">EchoMind 请求主链路与旁挂能力</div>
+<svg viewBox="0 0 720 300" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="60.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">请求</text><text x="60.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">/chat</text><path d="M113 53 L130 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="128" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="180.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">记忆读取</text><text x="180.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">工作/情景/画像</text><path d="M233 53 L250 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="258" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="310.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">意图识别</text><text x="310.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">规则+向量+LLM</text><path d="M363 53 L380 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="388" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="440.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">知识检索</text><text x="440.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">按意图触发</text><path d="M493 53 L510 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="518" y="18" width="104" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="570.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">Agent 路由</text><text x="570.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">4 类 Agent</text><path d="M623 53 L640 53" stroke="#0E7C86" stroke-width="1.3" opacity=".5"/><rect x="632" y="18" width="96" height="70" rx="9" fill="#FFFFFF" stroke="#E6E2D8"/><text x="680.0" y="46" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">回复 + 写回</text><text x="680.0" y="64" font-size="9" fill="#6B7280" text-anchor="middle">Redis/Chroma</text><rect x="8" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="18" y="137" font-size="10.5" font-weight="700" fill="#12324E">Skills 热加载</text><text x="18" y="152" font-size="9" fill="#6B7280">业务规则动态注入</text><rect x="258" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="268" y="137" font-size="10.5" font-weight="700" fill="#12324E">工具层</text><text x="268" y="152" font-size="9" fill="#6B7280">缓存 / 熔断 / 重排</text><rect x="388" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="398" y="137" font-size="10.5" font-weight="700" fill="#12324E">监控</text><text x="398" y="152" font-size="9" fill="#6B7280">在线指标 + 路由降权</text><rect x="518" y="118" width="218" height="46" rx="8" fill="#F2EFE7" stroke="#E6E2D8"/><text x="528" y="137" font-size="10.5" font-weight="700" fill="#12324E">评测</text><text x="528" y="152" font-size="9" fill="#6B7280">LLM-as-Judge</text><text x="8" y="200" font-size="10" letter-spacing="1" fill="#6B7280">记忆分层</text><rect x="8" y="214" width="192" height="44" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="18" y="233" font-size="10.5" font-weight="700" fill="#101827">工作记忆</text><text x="18" y="247" font-size="9" fill="#6B7280">当前会话上下文</text><rect x="208" y="214" width="192" height="44" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="218" y="233" font-size="10.5" font-weight="700" fill="#101827">情景记忆</text><text x="218" y="247" font-size="9" fill="#6B7280">历史事件摘要</text><rect x="408" y="214" width="192" height="44" rx="8" fill="#FFFFFF" stroke="#E6E2D8"/><text x="418" y="233" font-size="10.5" font-weight="700" fill="#101827">用户画像</text><text x="418" y="247" font-size="9" fill="#6B7280">稳定偏好与标签</text><text x="8" y="278" font-size="10.5" fill="#6B7280">关键点：意图决定要不要检索、走哪个 Agent、注入哪套 Skills——而不是所有问题都丢给一个大模型。</text></svg></div></div>
+  </div>
+</div>
+</div></section>
+<section id="cat3"><div class="wrap">
+  <div class="group">
+  <div class="sec-head"><div class="sec-no">03 / 产品类</div><h2>产品类</h2></div>
+  <p class="sec-sub">从技术到可用：把访谈与知识库做成能交付给人使用的东西。</p>
+  
+<div class="card first" id="p05">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge repro">开源二次开发</span>
+      <span>05</span><span>·</span><span>产品类</span><span>·</span><span>个人产品化改造 · 基于开源 xiaozhi-fde-talk · 2026</span></div>
+    <h3>问对 · 访谈实时辅导</h3>
+    <p class="sub">访谈进行时，它替你想着下一个问题</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>FDE、售前、咨询每天在做客户访谈，但访谈质量高度依赖个人经验：新手容易漏问关键约束，老手也常在被带偏后忘记回到提纲。录音转写工具只解决“记下来”，解决不了“问到位”。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>问对是一个访谈实时辅导工具：开麦即转写，边听边分析对话结构，提示“下一个该问什么、哪些关键点还没问到”，访谈结束自动生成结构化需求报告，支持 Markdown / HTML / Word 导出。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>流式 ASR：分段送音 + 增量返回，字幕延迟控制在秒级</li><li>议题树：把访谈提纲拆成树，节点带“必问 / 可选 / 已覆盖”状态</li><li>提示生成：基于未覆盖节点 + 最近对话，约束模型只问一个问题</li><li>报告结构：背景 / 现状 / 痛点 / 约束 / 决策链 / 下一步</li><li>部署：Docker Compose + Nginx，ASR/LLM/OCR 三个配置档可切换</li><li>二次开发定位：在原开源项目基础上做场景化配置与交付流程改造，不冒充原创</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>实时提示而非事后复盘</b>：把访谈提纲变成议题树，边聊边判断覆盖度，缺口实时提醒。</li><li><b>数据不出内网</b>：FunASR 本地流式推理，适合带进客户现场和受监管行业。</li><li><b>聊完就有交付物</b>：自动生成结构化需求报告，减少事后整理与二次沟通。</li><li><b>一键部署</b>：Docker Compose 起全栈，注册即可用，可接豆包 / Qwen 等商用 ASR 与 LLM。</li></ul></div>
+        
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>前端负责实时录音与字幕上屏，WebSocket 推流到后端；ASR 流式转写后进入辅导引擎，引擎按议题树计算覆盖度、生成提示；会话结束后汇总为结构化报告并导出。</p><div class="fig"><div class="fig-title">访谈前 / 中 / 后三段价值</div>
+<svg viewBox="0 0 700 250" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="12" y="18" width="206" height="170" rx="12" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="12" y="18" width="206" height="5" rx="2" fill="#6B7280"/><text x="28" y="46" font-size="12" font-weight="700" fill="#101827">访谈前</text><circle cx="32" cy="66" r="3" fill="#6B7280" opacity=".6"/><text x="44" y="70" font-size="10.5" fill="#26303F">结构化提纲</text><circle cx="32" cy="90" r="3" fill="#6B7280" opacity=".6"/><text x="44" y="94" font-size="10.5" fill="#26303F">议题树 + 必问项</text><rect x="244" y="18" width="206" height="170" rx="12" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="244" y="18" width="206" height="5" rx="2" fill="#0E7C86"/><text x="260" y="46" font-size="12" font-weight="700" fill="#101827">访谈中</text><circle cx="264" cy="66" r="3" fill="#0E7C86" opacity=".6"/><text x="276" y="70" font-size="10.5" fill="#26303F">实时转写</text><circle cx="264" cy="90" r="3" fill="#0E7C86" opacity=".6"/><text x="276" y="94" font-size="10.5" fill="#26303F">缺口识别</text><circle cx="264" cy="114" r="3" fill="#0E7C86" opacity=".6"/><text x="276" y="118" font-size="10.5" fill="#26303F">下一问提示</text><rect x="476" y="18" width="206" height="170" rx="12" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="476" y="18" width="206" height="5" rx="2" fill="#D98A1F"/><text x="492" y="46" font-size="12" font-weight="700" fill="#101827">访谈后</text><circle cx="496" cy="66" r="3" fill="#D98A1F" opacity=".6"/><text x="508" y="70" font-size="10.5" fill="#26303F">结构化报告</text><circle cx="496" cy="90" r="3" fill="#D98A1F" opacity=".6"/><text x="508" y="94" font-size="10.5" fill="#26303F">MD / HTML / Word</text><path d="M222 96 L240 96" stroke="#0E7C86" stroke-width="1.5" opacity=".5"/><path d="M454 96 L472 96" stroke="#D98A1F" stroke-width="1.5" opacity=".5"/><text x="12" y="216" font-size="10.5" fill="#6B7280">价值不在“转写”，在于把访谈从“靠记忆”变成“有提纲、有提示、有交付物”。</text><text x="12" y="236" font-size="10.5" fill="#6B7280">FunASR 本地推理，语音数据不出内网——这是 FDE / 售前能带进客户现场的前提。</text></svg></div></div>
+  </div>
+</div>
+</div>
+  
+<div class="card" id="p06">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge repro">课程实战复现</span>
+      <span>06</span><span>·</span><span>产品类</span><span>·</span><span>个人工程复现 · React 19 + NestJS + LangChain.js + pgvector · 2026</span></div>
+    <h3>知栈 · 企业知识库问答</h3>
+    <p class="sub">每个答案都能回到原文</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>企业知识散在 PDF、Excel、Wiki 里，搜索靠关键词，问一句“这个流程要走几步”就只能人工翻。专用向量库方案又要多维护一套存储，业务库和向量库双写，一致性出了问题很难查。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>知栈是一个 TypeScript 全栈 RAG 知识库：文档入库、自动切片、向量化、混合检索、带引用回答，SSE 流式输出。存储只用一份 PostgreSQL + pgvector，业务元数据与向量表同库，复刻类火山方舟知识库的核心链路。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>切片：RecursiveCharacterTextSplitter，按标点与段落递归，保留 chunkNo 便于回溯</li><li>检索：按 kbId 过滤后再做相似度，避免跨库串答案</li><li>流式：SSE 推送 token，前端边收边渲染，首字延迟明显下降</li><li>契约层：Zod schema + 共享 DTO，前后端不靠口头约定</li><li>FDE 视角：先问规模与运维现状，再决定要不要引入专用向量库</li><li>评测：以“答案可回溯到原文片段”为第一标准，而不是只看回答流畅度</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>同库存储</b>：knowledge_bases / documents / rag_chunks 一张 PG 里管完，避免双写不一致。</li><li><b>链路透明</b>：Loader → Splitter → Embedding → Retrieval → Prompt → Streaming，每步可观测、可替换。</li><li><b>多知识库隔离</b>：chunk 元数据带 kbId / documentId / chunkNo，检索按 kbId 过滤。</li><li><b>可交付</b>：pnpm monorepo，前后端共享 DTO 与流式事件类型，一条命令起 PG。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title">存储选型：双库 vs 同库</div>
+<svg viewBox="0 0 460 220" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="16" y="18" width="204" height="150" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="16" y="18" width="204" height="4" rx="2" fill="#6B7280"/><text x="30" y="44" font-size="10.5" font-weight="700" fill="#101827">专用向量库 + 业务库</text><text x="30" y="70" font-size="10" fill="#26303F">· 两套存储</text><text x="30" y="94" font-size="10" fill="#26303F">· 双写一致性</text><text x="30" y="118" font-size="10" fill="#26303F">· 运维成本高</text><rect x="240" y="18" width="204" height="150" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="240" y="18" width="204" height="4" rx="2" fill="#0E7C86"/><text x="254" y="44" font-size="10.5" font-weight="700" fill="#101827">PostgreSQL + pgvector</text><text x="254" y="70" font-size="10" fill="#26303F">· 一套存储</text><text x="254" y="94" font-size="10" fill="#26303F">· 事务一致</text><text x="254" y="118" font-size="10" fill="#26303F">· 中小规模够用</text><text x="16" y="192" font-size="10" fill="#6B7280">选型判断：知识库规模在千万级 chunk 以内、且已有 PG 运维能力时，</text><text x="16" y="208" font-size="10" fill="#6B7280">同库存储的收益大于专用向量库的性能优势。</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>前端 React 19 做知识库、文档、切片、检索、问答五个页面；API 层 NestJS 提供 SSE 问答、CSV/XLSX 入库；RAG 引擎用 LangChain.js 串起 Loader → Splitter → Embedding → Retrieval → Prompt；存储层用 pgvector 表存向量与元数据。</p><div class="fig"><div class="fig-title">四层架构：前端 / API / RAG 引擎 / PG + pgvector</div>
+<svg viewBox="0 0 700 290" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="14" y="14" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="14" width="5" height="52" rx="2" fill="#0E7C86"/><text x="32" y="36" font-size="11.5" font-weight="700" fill="#101827">Web 前端</text><text x="32" y="53" font-size="9.5" fill="#6B7280">React 19 · 知识库 / 文档 / 切片 / 问答</text><path d="M350 67 L350 75" stroke="#0E7C86" stroke-width="1.2" opacity=".4"/><rect x="14" y="76" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="76" width="5" height="52" rx="2" fill="#0E7C86"/><text x="32" y="98" font-size="11.5" font-weight="700" fill="#101827">API 层</text><text x="32" y="115" font-size="9.5" fill="#6B7280">NestJS · SSE 流式 · 入库 / 检索 / 问答</text><path d="M350 129 L350 137" stroke="#0E7C86" stroke-width="1.2" opacity=".4"/><rect x="14" y="138" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="138" width="5" height="52" rx="2" fill="#12324E"/><text x="32" y="160" font-size="11.5" font-weight="700" fill="#101827">RAG 引擎</text><text x="32" y="177" font-size="9.5" fill="#6B7280">LangChain.js · Loader → Splitter → Embedding → Retrieval → Prompt</text><path d="M350 191 L350 199" stroke="#12324E" stroke-width="1.2" opacity=".4"/><rect x="14" y="200" width="672" height="52" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="14" y="200" width="5" height="52" rx="2" fill="#D98A1F"/><text x="32" y="222" font-size="11.5" font-weight="700" fill="#101827">存储层</text><text x="32" y="239" font-size="9.5" fill="#6B7280">PostgreSQL + pgvector（业务表与向量表同库）</text><text x="14" y="270" font-size="10" fill="#6B7280">同一份 PostgreSQL 里既有 knowledge_bases / documents，也有 rag_chunks 向量表——少一套双写，就少一类一致性事故。</text></svg></div></div>
+  </div>
+</div>
+</div></section>
+<section id="cat4"><div class="wrap">
+  <div class="group">
+  <div class="sec-head"><div class="sec-no">04 / 数据类</div><h2>数据类</h2></div>
+  <p class="sec-sub">先治理再建模：数据资产化，以及让 LLM 参与定性分析但保留人的判断。</p>
+  
+<div class="card first" id="p07">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge live">实战交付</span>
+      <span>07</span><span>·</span><span>数据类</span><span>·</span><span>广州市政府采购中心 · 数据治理负责人 · 2023 – 2026</span></div>
+    <h3>政务采购数据治理</h3>
+    <p class="sub">先把数据变成能用的资产，再谈模型</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>采购数据散在 4 个渠道、6 个库：公告一套口径、合同一套口径、供应商信息又在另一个系统。字段命名不一致、重复记录多、关键字段缺失，直接拿去做 RAG 或训练，模型学到的就是噪声。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>按“盘点 → 标准 → 清洗 → 主数据 → 质量 → 安全”六阶段推进治理，把 76.3 万条公告、53.6 万份合同整理成可检索、可训练、可追溯的数据资产，并沉淀 2000 条标注样本用于模型评测。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>盘点方法：业务调研 → 系统级 → 表级 → 字段级，四步落到字段清单</li><li>标准体系：数据元 / 代码项 / 编码规则 / 命名规范 / 信息资源目录</li><li>加工策略：全删全插、切片追加、拉链表三种，按更新频率选</li><li>质量规则：完整性、唯一性、一致性、及时性四类，配监控告警</li><li>安全：分级分类 + 脱敏 + 权限管控，敏感字段单独授权</li><li>元数据：血缘分析支撑影响评估，改表前先看下游</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>规模</b>：4 个渠道 6 个库，76.3 万条公告、53.6 万份合同完成结构化治理。</li><li><b>标准化</b>：建立数据元、代码项、编码规则、命名规范四类标准，跨系统口径统一。</li><li><b>可评测</b>：沉淀 2000 条标注样本，让“模型好不好”有基准而不是拍脑袋。</li><li><b>可追溯</b>：元数据 + 血缘，每个指标能追到源表和加工逻辑。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 450 160" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0" y="19.84" font-size="11.5" fill="#6B7280">公告数据</text><rect x="92" y="4" width="286" height="22" rx="4" fill="#F2EFE7"/><rect x="92" y="4" width="272.8" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="373.8" y="19.84" font-size="11" font-weight="700" fill="#101827">76.3 万条</text><text x="0" y="57.84" font-size="11.5" fill="#6B7280">合同数据</text><rect x="92" y="42" width="286" height="22" rx="4" fill="#F2EFE7"/><rect x="92" y="42" width="191.6" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="292.6" y="57.84" font-size="11" font-weight="700" fill="#101827">53.6 万份</text><text x="0" y="95.84" font-size="11.5" fill="#6B7280">标注样本</text><rect x="92" y="80" width="286" height="22" rx="4" fill="#F2EFE7"/><rect x="92" y="80" width="3.0" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="104.0" y="95.84" font-size="11" font-weight="700" fill="#101827">2,000 条</text><text x="0" y="133.84" font-size="11.5" fill="#6B7280">数据渠道</text><rect x="92" y="118" width="286" height="22" rx="4" fill="#F2EFE7"/><rect x="92" y="118" width="3.0" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="104.0" y="133.84" font-size="11" font-weight="700" fill="#101827">4 个渠道</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>六阶段流水线：先做业务调研与数据盘点（系统级 → 表级 → 字段级），再定标准，然后清洗与整合，抽取主数据（供应商、项目、商品），建立质量规则与监控，最后做分级分类与脱敏，形成可共享的数据资产。</p><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 720 126" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="0.0" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="54.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">盘点</text><text x="54.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">4 渠道 6 库</text><path d="M110.3 63 L119.3 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M116.3 59 L120.3 63 L116.3 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="122.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="122.3" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="176.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">标准</text><text x="176.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">数据元 / 代码项</text><path d="M232.7 63 L241.7 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M238.7 59 L242.7 63 L238.7 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="244.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="244.7" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="298.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">清洗</text><text x="298.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">去重 / 补全</text><path d="M355.0 63 L364.0 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M361.0 59 L365.0 63 L361.0 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="367.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="367.0" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="421.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">主数据</text><text x="421.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">供应商 / 项目</text><path d="M477.3 63 L486.3 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M483.3 59 L487.3 63 L483.3 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="489.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="489.3" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="543.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">质量</text><text x="543.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">规则 + 监控</text><path d="M599.7 63 L608.7 63" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><path d="M605.7 59 L609.7 63 L605.7 67" fill="none" stroke="#D98A1F" stroke-width="1.6" opacity=".5"/><rect x="611.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="611.7" y="22" width="108.3" height="4" rx="2" fill="#D98A1F"/><text x="665.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">安全</text><text x="665.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">分级 / 脱敏</text></svg></div></div>
+  </div>
+</div>
+</div>
+  
+<div class="card" id="p08">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge live">实战交付</span>
+      <span>08</span><span>·</span><span>数据类</span><span>·</span><span>新加坡国立大学 · 研究助理 · Abel Yang 教授指导 · 2026.08 – 至今</span></div>
+    <h3>47,950 条文本的 LLM 辅助编码</h3>
+    <p class="sub">让大模型做初筛，让人只处理分歧</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>社科定性研究依赖人工编码：读完几千条文本、逐条打标签、再做主题归纳。周期长、成本高，而且不同编码员之间的一致性很难保证。大模型能提速，但直接让模型打标签会引入幻觉和偏见。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>把传统编码流程（开放式 → 轴心 → 选择性）拆解成可自动化的步骤：Embeddings 聚类先分堆，LLM 按编码本初筛，人工只复核分歧样本，再计算一致性、修订编码本，形成闭环。在 47,950 条文本上验证。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>编码本：先定义维度与取值，再让模型判断，避免“边标边改定义”</li><li>Embedding 聚类：先用向量把语料分堆，降低逐条判断的成本</li><li>一致性：Cohen's kappa + 抽样复核，分歧样本回流修订</li><li>提示设计：给正反例 + 强制引用原文片段，减少无据编造</li><li>评测：一致性 / 覆盖率 / 人工复核比例三个维度一起看</li><li>边界：涉及价值判断的编码只做辅助，不做自动定论</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>规模</b>：47,950 条文本全量处理，人工复核比例压到 18%。</li><li><b>质量</b>：编码一致性 κ 0.86，主题覆盖率 91%。</li><li><b>方法</b>：明确人机边界——机器负责覆盖，人负责判断。</li><li><b>可迁移</b>：同一套流程可用于研报解析、舆情归因、客服会话分析。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 440 122" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0" y="19.84" font-size="11.5" fill="#6B7280">编码一致性</text><rect x="110" y="4" width="258" height="22" rx="4" fill="#F2EFE7"/><rect x="110" y="4" width="230.0" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="349.0" y="19.84" font-size="11" font-weight="700" fill="#101827">κ 0.86</text><text x="0" y="57.84" font-size="11.5" fill="#6B7280">主题覆盖</text><rect x="110" y="42" width="258" height="22" rx="4" fill="#F2EFE7"/><rect x="110" y="42" width="243.4" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="362.4" y="57.84" font-size="11" font-weight="700" fill="#101827">91%</text><text x="0" y="95.84" font-size="11.5" fill="#6B7280">人工复核比例</text><rect x="110" y="80" width="258" height="22" rx="4" fill="#F2EFE7"/><rect x="110" y="80" width="48.1" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="167.1" y="95.84" font-size="11" font-weight="700" fill="#101827">18%</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>语料 → 清洗与分块 → Embedding 聚类 → LLM 按编码本初筛 → 人工抽样复核与分歧处理 → 一致性计算 → 编码本修订 → 主题归纳。评测用三维指标：一致性、覆盖度、复核成本。</p><div class="fig"><div class="fig-title">LLM 辅助定性编码流程</div>
+<svg viewBox="0 0 700 240" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="10" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="89" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">语料准备</text><text x="89" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">47,950 条文本</text><path d="M170 55 L182 55" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="182" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="261" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">自动编码</text><text x="261" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">Embeddings + LLM</text><path d="M342 55 L354 55" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="354" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="433" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">一致性校验</text><text x="433" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">人工抽样复核</text><path d="M514 55 L526 55" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="526" y="22" width="158" height="66" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><text x="605" y="50" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">主题归纳</text><text x="605" y="68" font-size="9.5" fill="#6B7280" text-anchor="middle">轴心 / 选择性编码</text><rect x="10" y="110" width="674" height="52" rx="9" fill="#0E7C86" opacity=".08"/><text x="24" y="132" font-size="10.5" font-weight="700" fill="#0E7C86">Human-in-the-Loop：机器全量初筛，人只处理分歧样本</text><text x="24" y="150" font-size="9.5" fill="#6B7280">抽样复核 → 计算一致性 → 修订编码本 → 再跑一遍，形成闭环</text><text x="10" y="190" font-size="10" fill="#6B7280">这套流程的价值：把定性研究从“几个月人工编码”压到“几天初筛 + 人工把关”。</text><text x="10" y="206" font-size="10" fill="#6B7280">同一套方法可直接迁移到研报解析、舆情归因、客服会话分析。</text></svg></div></div>
+  </div>
+</div>
+</div></section>
+<section id="cat5"><div class="wrap">
+  <div class="group">
+  <div class="sec-head"><div class="sec-no">05 / 行业类</div><h2>行业类</h2></div>
+  <p class="sec-sub">在具体行业里跑通算法：量化交易的因子与回测，金融风控的可解释与监控。</p>
+  
+<div class="card first" id="p09">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge repro">课程实战复现</span>
+      <span>09</span><span>·</span><span>行业类</span><span>·</span><span>个人项目 · 12 周训练营复现 + 改造 · 2026</span></div>
+    <h3>AI 量化交易系统</h3>
+    <p class="sub">从因子到回测：把“看起来能赚”变成“能解释为什么赚”</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>量化门槛高在“链路”：数据、因子、组合、回测、风控、执行每一段都有坑。只做因子不回测，不知道是不是过拟合；只做回测不控回撤，实盘拿不住。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>按 12 周训练营的路径完整走一遍量化系统：数据获取与清洗、因子构建、组合打分与约束、walk-forward 回测、回撤与仓位风控，并用 LLM 辅助研报与公告解析，做事件驱动的信号补充。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>因子处理：去极值 → 标准化 → 中性化，三步之后再进模型</li><li>有效性：IC / IR / 分层回测，三者一起看才不容易被骗</li><li>回测：walk-forward 滚动窗口，训练集与验证集严格分开</li><li>风控：最大回撤阈值、单票上限、行业偏离约束</li><li>LLM 事件抽取：公告 → 事件类型 / 影响方向 / 置信度，人工抽检</li><li>复盘：每轮回测记录参数、样本区间、失效原因，避免重复踩坑</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>全链路</b>：数据 → 因子 → 组合 → 回测 → 风控 → 模拟执行，每段有产出物。</li><li><b>不过拟合</b>：walk-forward + 样本外验证，因子有效性看 IC / IR 而不只看收益。</li><li><b>能控风险</b>：最大回撤与仓位约束写进流程，而不是事后看。</li><li><b>LLM 加持</b>：用大模型解析研报与公告，抽取事件与预期差，作为另类信号。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 440 160" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0" y="19.84" font-size="11.5" fill="#6B7280">年化收益</text><rect x="96" y="4" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="4" width="30.8" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="135.8" y="19.84" font-size="11" font-weight="700" fill="#101827">18%</text><text x="0" y="57.84" font-size="11.5" fill="#6B7280">最大回撤</text><rect x="96" y="42" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="42" width="18.8" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="123.8" y="57.84" font-size="11" font-weight="700" fill="#101827">-11%</text><text x="0" y="95.84" font-size="11.5" fill="#6B7280">Sharpe</text><rect x="96" y="80" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="80" width="256.6" height="22" rx="4" fill="#12324E" opacity=".92"/><text x="361.6" y="95.84" font-size="11" font-weight="700" fill="#101827">1.5</text><text x="0" y="133.84" font-size="11.5" fill="#6B7280">换手率</text><rect x="96" y="118" width="272" height="22" rx="4" fill="#F2EFE7"/><rect x="96" y="118" width="59.9" height="22" rx="4" fill="#6B7280" opacity=".92"/><text x="164.9" y="133.84" font-size="11" font-weight="700" fill="#101827">35%</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>数据层拉行情与财务；因子层做动量、波动、质量三类因子并标准化；组合层按打分选股并加行业与个股权重约束；回测层用 walk-forward 滚动训练与验证；风控层设最大回撤、单票上限、换手上限；执行层做模拟盘验证。</p><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 720 126" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="0.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="0.0" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="54.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">数据</text><text x="54.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">行情 / 财务</text><path d="M110.3 63 L119.3 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M116.3 59 L120.3 63 L116.3 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="122.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="122.3" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="176.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">因子</text><text x="176.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">动量 / 波动 / 质量</text><path d="M232.7 63 L241.7 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M238.7 59 L242.7 63 L238.7 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="244.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="244.7" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="298.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">组合</text><text x="298.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">打分 / 约束</text><path d="M355.0 63 L364.0 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M361.0 59 L365.0 63 L361.0 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="367.0" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="367.0" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="421.2" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">回测</text><text x="421.2" y="72" font-size="10" fill="#6B7280" text-anchor="middle">walk-forward</text><path d="M477.3 63 L486.3 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M483.3 59 L487.3 63 L483.3 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="489.3" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="489.3" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="543.5" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">风控</text><text x="543.5" y="72" font-size="10" fill="#6B7280" text-anchor="middle">回撤 / 仓位</text><path d="M599.7 63 L608.7 63" stroke="#12324E" stroke-width="1.6" opacity=".5"/><path d="M605.7 59 L609.7 63 L605.7 67" fill="none" stroke="#12324E" stroke-width="1.6" opacity=".5"/><rect x="611.7" y="22" width="108.3" height="82" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="611.7" y="22" width="108.3" height="4" rx="2" fill="#12324E"/><text x="665.8" y="52" font-size="12" font-weight="700" fill="#101827" text-anchor="middle">执行</text><text x="665.8" y="72" font-size="10" fill="#6B7280" text-anchor="middle">模拟盘</text></svg></div></div>
+  </div>
+</div>
+</div>
+  
+<div class="card" id="p10">
+  <div class="card-top">
+    <div class="card-meta"><span class="badge repro">课程实战复现</span>
+      <span>10</span><span>·</span><span>行业类</span><span>·</span><span>个人项目 · 评分卡 + 机器学习风控 + 部署 · 2026</span></div>
+    <h3>金融风控算法模型</h3>
+    <p class="sub">可解释、可监控、能上线：风控模型的三个硬约束</p>
+  </div>
+  <div class="card-body">
+    <div class="grid2">
+      <div>
+        <div class="blk"><h4>项目背景</h4><p>风控和推荐最大的区别是：推荐错了用户划走，风控错了要付出真金白银，还要能向监管解释。所以模型不只要能区分好坏，还要可解释、可监控、能部署。</p></div>
+        <div class="blk"><h4>项目介绍</h4><p>按“数据与标签 → 特征工程 → 模型 → 评估 → 监控 → 部署”的链路完整复现金融风控建模：信用评分卡、消费金融风控、企业经营风险预测，以及模型部署的几种方式。</p></div>
+        <div class="blk"><h4>可公开的技术细节</h4><ul><li>分箱：卡方分箱 + 单调性约束，避免“分箱很好看但业务讲不通”</li><li>WOE / IV：IV 筛变量，WOE 让逻辑回归能处理非线性</li><li>评估：KS、AUC、提升度、跨期稳定性，四项缺一不可</li><li>监控：PSI > 0.1 触发排查，KS 衰减超过阈值触发重训</li><li>拒绝推断：只有放款样本有表现，要用拒绝推断修正样本偏差</li><li>部署：批量（离线评分）、实时（API）、嵌入式（规则引擎内）</li></ul></div>
+      </div>
+      <div>
+        <div class="blk"><h4>项目亮点</h4><ul><li><b>评分卡</b>：分箱 + WOE + 逻辑回归 + 分数映射，每个拒绝理由可解释。</li><li><b>机器学习风控</b>：GBDT 类模型提升区分度，用 SHAP 做可解释性补偿。</li><li><b>监控闭环</b>：PSI 看漂移、KS 看衰减、坏账率看实际表现。</li><li><b>部署</b>：批量评分、实时 API、嵌入式三种方式，按场景选。</li></ul></div>
+        <div class="blk"><h4>关键指标</h4><div class="fig"><div class="fig-title"></div>
+<svg viewBox="0 0 420 122" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><text x="0" y="19.84" font-size="11.5" fill="#6B7280">KS</text><rect x="70" y="4" width="278" height="22" rx="4" fill="#F2EFE7"/><rect x="70" y="4" width="136.0" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="215.0" y="19.84" font-size="11" font-weight="700" fill="#101827">0.42</text><text x="0" y="57.84" font-size="11.5" fill="#6B7280">AUC</text><rect x="70" y="42" width="278" height="22" rx="4" fill="#F2EFE7"/><rect x="70" y="42" width="262.3" height="22" rx="4" fill="#0E7C86" opacity=".92"/><text x="341.3" y="57.84" font-size="11" font-weight="700" fill="#101827">0.81</text><text x="0" y="95.84" font-size="11.5" fill="#6B7280">PSI</text><rect x="70" y="80" width="278" height="22" rx="4" fill="#F2EFE7"/><rect x="70" y="80" width="25.9" height="22" rx="4" fill="#D98A1F" opacity=".92"/><text x="104.9" y="95.84" font-size="11" font-weight="700" fill="#101827">0.08</text></svg></div></div>
+      </div>
+    </div>
+    <div class="blk"><h4>基础原理与架构</h4><p>数据层整合申请、行为、征信三类数据并定义好坏标签；特征层做分箱、WOE 编码、IV 筛选；模型层用评分卡做基线、GBDT 做提升；评估层看 KS / AUC / 提升度；上线后持续监控 PSI 与 KS。</p><div class="fig"><div class="fig-title">风控建模链路与监控</div>
+<svg viewBox="0 0 700 250" width="100%" xmlns="http://www.w3.org/2000/svg"
+style="font-family:Inter,'PingFang SC','Microsoft YaHei',sans-serif"><rect x="8" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="8" y="20" width="152" height="4" rx="2" fill="#6B7280"/><text x="84" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">数据与标签</text><text x="84" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">申请 / 行为 / 征信</text><path d="M162 52 L176 52" stroke="#6B7280" stroke-width="1.4" opacity=".5"/><rect x="176" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="176" y="20" width="152" height="4" rx="2" fill="#0E7C86"/><text x="252" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">特征工程</text><text x="252" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">分箱 / WOE / IV</text><path d="M330 52 L344 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="344" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="344" y="20" width="152" height="4" rx="2" fill="#0E7C86"/><text x="420" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">模型</text><text x="420" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">评分卡 + GBDT</text><path d="M498 52 L512 52" stroke="#0E7C86" stroke-width="1.4" opacity=".5"/><rect x="512" y="20" width="152" height="64" rx="10" fill="#FFFFFF" stroke="#E6E2D8"/><rect x="512" y="20" width="152" height="4" rx="2" fill="#12324E"/><text x="588" y="48" font-size="11.5" font-weight="700" fill="#101827" text-anchor="middle">评估</text><text x="588" y="66" font-size="9.5" fill="#6B7280" text-anchor="middle">KS / AUC / PSI</text><rect x="8" y="108" width="684" height="58" rx="9" fill="#F2EFE7"/><text x="22" y="130" font-size="10.5" font-weight="700" fill="#12324E">评分卡：分箱 → WOE 编码 → 逻辑回归 → 分数映射（A - B·ln(odds)）</text><text x="22" y="150" font-size="9.5" fill="#6B7280">可解释性是硬要求：每个拒绝理由都要能落到具体变量与分箱。</text><text x="8" y="192" font-size="10" fill="#6B7280">监控：PSI 看分布漂移，KS 看区分度衰减，坏账率看实际表现——三者一起判模型是否该迭代。</text><text x="8" y="212" font-size="10" fill="#6B7280">复现范围：信用评分卡、消费金融风控、企业经营风险预测、模型部署方式。</text></svg></div></div>
+  </div>
+</div>
+</div></section>
+
+<section id="note"><div class="wrap">
+  <div class="sec-head"><div class="sec-no">NOTE</div><h2>关于项目性质</h2></div>
+  <p class="sec-sub">作品集里每个项目都标了类型，避免把“跟着课程做过”说成“从零自研”。</p>
+  <div class="map" style="grid-template-columns:repeat(3,1fr)">
+    <div class="map-col"><div class="t">实战交付</div><div class="n">在职期间的真实项目</div>
+      <ul><li>有真实用户、真实数据、上线记录</li><li>能讲清需求来源、决策过程与结果</li><li>涉及未公开数据与内部系统的部分已做脱敏</li></ul></div>
+    <div class="map-col"><div class="t">自研</div><div class="n">独立设计与实现的系统</div>
+      <ul><li>代码、架构、评测均由本人完成</li><li>可现场演示与讲解实现细节</li><li>EchoMind 为完整自研项目</li></ul></div>
+    <div class="map-col"><div class="t">课程实战复现</div><div class="n">在公开课程 / 开源基线上的实现</div>
+      <ul><li>如实标注基线来源，不冒充原创</li><li>重点呈现工程理解、改造点与可迁移能力</li><li>面试时可展开讲“我改了什么、为什么”</li></ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>
+    <h5>CONTACT</h5>
+    <p>吴宇歌 · Yuge Wu<br>新加坡国立大学 · 科学人工智能硕士（AI for Science）<br>
+    方向：大模型算法 / 多智能体工程 / 数据与知识系统</p>
+    <div class="mail">github.com/Sheroisshero</div>
+  </div>
+  <div>
+    <h5>说明</h5>
+    <p>本作品集用于求职展示。涉及原单位的项目已做脱敏处理，不包含未公开的采购数据、客户信息与内部系统细节。</p>
+    <div class="note">标注“课程实战复现”的项目基于公开课程或开源项目，个人贡献在于实现、改造与工程化验证。<br>
+    版本：2026.11</div>
+  </div>
+  <div class="foot-end">以上，是过去七年里，十个可以拿出来聊的切片。</div>
+</div></footer>
+</body></html>
